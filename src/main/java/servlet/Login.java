@@ -58,8 +58,7 @@ public class Login extends HttpServlet {
     	List<ReadingRecBean> readingRecList = dao2.findAll();
     	
     	//「bookShelf.jsp」、「ReadingRecAdd.java」で使うため、セッションスコープに保存。
-    	HttpSession session2 = request.getSession();
-    	session2.setAttribute("readingRecList", readingRecList);
+    	session.setAttribute("readingRecList", readingRecList);
     	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp");
         dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
