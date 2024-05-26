@@ -23,7 +23,7 @@
       </div>
       <p>
         <a href="Login" class="btn">ログイン</a>
-        <a href="accountEntry.jsp" class="btn">新規登録</a>
+        <a href="AccountEntry" class="btn">新規登録</a>
       </p>
     </div>
   </main>

@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
     	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp");
         dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-    	response.sendRedirect("http://localhost:8080/yonda/myPage.jsp");    //リダイレクトはWEB-INF直下に置く
+    	
     }
 	
   }
