@@ -17,12 +17,7 @@
     <jsp:include page = "header.jsp" /> 
   </header>
   <main>
-	  <div class="top-container">
-	  	<a href="myPage.jsp"><img src="./img/myicon.png" alt="マイページ"></a>
-	  	<h3><c:out value="${account.name}" />さん</h3>
-    	<a href="bookShelf.jsp" class="btn">本棚</a>
-    	<a href="Profile" class="btn">プロフィール</a>
-	  </div>
+	  <jsp:include page = "myPageMenu.jsp" />
 	  
     	<h2>プロフィールの編集</h2>
 

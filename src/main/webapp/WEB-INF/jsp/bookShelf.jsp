@@ -30,16 +30,7 @@
   </header>
   
   <main>
-  
-	  <div class="top-container">
-	  	<a href="myPage.jsp"><img src="./img/myicon.png" alt="マイページ"></a>
-	  	
-	  	<% //P366、P449参考  %>
-	  	<h3><c:out value="${account.name}" />さん</h3>
-	  
-    	<a href="bookShelf.jsp" class="btn">本棚</a>
-    	<a href="profile.jsp" class="btn">プロフィール</a>
-	  </div>
+	<jsp:include page = "myPageMenu.jsp" />
 	  
 	<h2>本棚</h2>
 

@@ -13,13 +13,7 @@
   </header>
   
   <main>
-  
-  	  <div class="top-container">
-	  	<a href="myPage.jsp"><img src="./img/myicon.png" alt="マイページ"></a>
-	  	<h3>${account.name}さん</h3>
-    	<a href="BookShelf" class="btn">本棚</a>
-    	<a href="Profile" class="btn">プロフィール</a>
-	  </div>
+    <jsp:include page = "myPageMenu.jsp" />
     
     <div class="center-container">
       <p>本の追加完了</P>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,12 +17,7 @@
   </header>
   
   <main>
-	  <div class="top-container">
-	  	<a href="myPage.jsp"><img src="./img/myicon.png" alt="マイページ"></a>
-	  	<h3>${account.name}さん</h3>
-    	<a href="BookShelf" class="btn">本棚</a>
-    	<a href="Profile" class="btn">プロフィール</a>
-	  </div>
+	  <jsp:include page = "myPageMenu.jsp" />
 
   	<h3>読書状況　　　161</h3>
   	<table class="rounded-table">

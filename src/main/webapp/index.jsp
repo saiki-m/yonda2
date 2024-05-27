@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <jsp:include page = "header.jsp" /> 
+    <jsp:include page = "./WEB-INF/jsp/header.jsp" /> 
   </header>
   <main>
     <div class="center-container">
