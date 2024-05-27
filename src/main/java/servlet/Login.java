@@ -37,12 +37,15 @@ public class Login extends HttpServlet {
     
     //データベースに接続。アカウントIDを見つけて取得する。
     LoginDAO dao = new LoginDAO();
-	AccountBean accountID = dao.findAccountID(account);
+	AccountBean accountID = dao.findAccountID(name, password);
 	
 	// アカウントIDが見つからず、取得できなかったとき。
 	// ログイン失敗
 	if (accountID == null) { 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginFailure.jsp");
+		
+		request.setAttribute("errorMsg", "ユーザ名、パスワードを正しく入力してください");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
         dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
 	}   
 	

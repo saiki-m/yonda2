@@ -42,7 +42,9 @@ public class AccountEntry extends HttpServlet {
 	
     //登録できないとき
 	else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountEntryFailure.jsp");
+		request.setAttribute("errorMsg", "すべての項目を正しく入力してください");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountEntry.jsp");
         dispatcher.forward(request, response);
     }
 	

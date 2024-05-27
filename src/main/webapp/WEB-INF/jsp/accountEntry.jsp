@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% //教科書P366、P449参考  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +18,9 @@
   <main>
     <div class="cert-container">
       <h2>新規登録</h2>
+          <c:if test="${not empty errorMsg}">
+            <p><font color="red"><c:out value="${errorMsg}" /></font></p>
+          </c:if>
       	<form action="AccountEntry" method="post">
 	        <input type="text" name="name" class="input-field" placeholder="ユーザ名" required>
 	        <input type="password" name="password" class="input-field" placeholder="パスワード" required>
