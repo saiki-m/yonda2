@@ -45,8 +45,10 @@ public class RePass extends HttpServlet {
     
     
     else {
-      RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassFailure.jsp");
-      dispatcher.forward(request, response);
+    	request.setAttribute("errorMsg", "同じパスワードを入力してください");
+    	
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePass.jsp");
+        dispatcher.forward(request, response);
     } 
   }
 }

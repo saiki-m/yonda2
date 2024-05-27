@@ -43,7 +43,9 @@ public class RePassId extends HttpServlet {
 	// アカウントIDが見つからず、取得できなかったとき。
 	// 失敗
 	if (accountID == null) { 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassIdFailure.jsp");
+		request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassId.jsp");
         dispatcher.forward(request, response); 
 	}
 	
