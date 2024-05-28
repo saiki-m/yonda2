@@ -29,7 +29,18 @@
 		<input type="text" class="search-box" placeholder="キーワードを入力">
 		<div class="sortSearch-btn">検索</div>
 	</div>
-
+    
+    <c:if test="${not empty Msg}">
+    
+      <p><font color="blue"><c:out value="${Msg}" /></font></p>
+    
+    </c:if> 
+    
+    <c:if test="${not empty errorMsg}">
+    
+      <p><font color="red"><c:out value="${errorMsg}" /></font></p>
+    
+    </c:if> 
     	
     	<table class="bookshelf-table">
 		    <tr>
@@ -42,13 +53,16 @@
 		    
 		    <c:forEach var="Record" items="${readingRecList}" varStatus="status">
                 <tr>
+                <form action="?" method="post">
                     <td><c:out value="${Record.title}" /></td>
                     <td><c:out value="${Record.author}" /></td>
                     <td><c:out value="${Record.readStatus}" /></td>
                     
                     <td><button type="submit" formaction="MyPageEdit2">編集</button></td>
-		            <td><button type="submit" formaction="DeleteAccount2">削除</button></td>
+		            <td><button type="submit" formaction="DeleteReadingRec">削除</button></td>
                     <input type="hidden" name="LoopIndex" value=<c:out value="${status.index}"/>>
+                
+                </form>
                 </tr>
             </c:forEach>
 		</table>
