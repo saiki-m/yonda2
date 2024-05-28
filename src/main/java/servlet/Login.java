@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 	//アカウントIDが見つかったとき
     //ログイン成功
     else {
-    	//セッションスコープに保存。 マイページや本棚でEL式を使うため。
+    	//セッションスコープに保存。 マイページや本棚で使うため。
     	HttpSession session = request.getSession();
     	session.setAttribute("account", account);
     	

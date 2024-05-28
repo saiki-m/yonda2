@@ -21,9 +21,9 @@ public class AccountEntryDAO extends ConfigDB{
     // データベースへ接続
     try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
     	
-      // SELECT文を準備
+      // SELECT文を準備。プロフィールIDは最初は0。プロフィール編集したときに更新する。
       String sql = "INSERT INTO アカウント(アカウント名, パスワード, メールアドレス, 秘密の質問, プロフィールID)\r\n"
-      		        + "VALUES (?, ?, ?, ?, 1)";
+      		        + "VALUES (?, ?, ?, ?, 0)";
         
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
