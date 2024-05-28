@@ -3,7 +3,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<% //P366、P449参考  urlではなくuri%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%@ page import="beans.ReadingRecBean" %>
+<%@ page import="java.util.List"%>
+    
+<%
+//Login.javaでセッションスコープに保存したデータを取得
+ List<ReadingRecBean> readingRecList = (List<ReadingRecBean>)session.getAttribute("readingRecList");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -38,19 +48,23 @@
 		        <th>読書状況</th>
 		    </tr>
 		    
+		    <!-- 
+		    <tr>
+		        <td><a href="readingRec.jsp">容疑者Xの献身</a></td>
+		        <td>東野圭吾</td>
+		        <td>感想を書いた</td>
+		    </tr>
+		    -->
 		    
+		    <%-- dbフォルダ内の「ReadingStatus.sql」のVALUESが表示される --%>
+		    <%for(ReadingRecBean book : readingRecList){ %>
+	            <tr>
+	                <td><%=book.getTitle()%></td>
+	                <td><%=book.getAuthor()%></td>
+	                <td><%=book.getReadStatus()%></td>
+		        </tr>
+	        <% } %>
 		    
-		    <c:forEach var="Record" items="${readingRecList}" varStatus="status">
-                <tr>
-                    <td><c:out value="${Record.title}" /></td>
-                    <td><c:out value="${Record.author}" /></td>
-                    <td><c:out value="${Record.readStatus}" /></td>
-                    
-                    <td><button type="submit" formaction="MyPageEdit2">編集</button></td>
-		            <td><button type="submit" formaction="DeleteAccount2">削除</button></td>
-                    <input type="hidden" name="LoopIndex" value=<c:out value="${status.index}"/>>
-                </tr>
-            </c:forEach>
 		</table>
 		
 	<a href="ReadingRecAdd" class="btn">本を追加</a><br>

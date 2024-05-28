@@ -5,7 +5,7 @@
 
     <% //教科書P344～349の動的インクルード %>
     <div class="top-container">
-	  	<a href="myPage.jsp"><img src="./img/myicon.png" alt="マイページ"></a>
+	  	<a href="MyPage"><img src="./img/myicon.png" alt="マイページ"></a>
 	  	
 	  	<h3><c:out value="${account.name}" />さん</h3>
     	

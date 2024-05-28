@@ -61,29 +61,30 @@ public class ReadingRecAddDAO extends ConfigDB{
 	    // データベースへ接続
 	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 	    	// SELECT文を準備
-	        String sql = "SELECT タイトル, 作者, 読書状況 FROM 読書状況";
+	        String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況 FROM 読書状況";
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 
 	        // SELECTを実行し、結果表を取得
 	        ResultSet rs = pStmt.executeQuery();
 
-	        // 結果表に格納されたレコードの内容を
-	        // record2インスタンスに設定し、readingRecListインスタンスに追加
-	        while (rs.next()) {
-	          String title = rs.getString("タイトル");
-	          String author = rs.getString("作者");
-	          String readStatus = rs.getString("読書状況");
-	          ReadingRecBean record2 = new ReadingRecBean(title, author, readStatus);
-	          readingRecList.add(record2);
-	        }
-	    }   catch (SQLException e) {
-	          e.printStackTrace();
-	          return null;
-	        }
-   return readingRecList;
+		        // 結果表に格納されたレコードの内容を
+		        // record2インスタンスに設定し、readingRecListインスタンスに追加
+		        while (rs.next()) {
+		          int ID = rs.getInt("読書状況ID");
+		          String title = rs.getString("タイトル");
+		          String author = rs.getString("作者");
+		          String readStatus = rs.getString("読書状況");
+		          ReadingRecBean record2 = new ReadingRecBean(ID, title, author, readStatus);
+		          readingRecList.add(record2);
+		        }
+		    return readingRecList;
+		        
+	    }   
+	    catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
           
   }   
 	    
-	    
-  
 }

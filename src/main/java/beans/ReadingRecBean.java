@@ -7,6 +7,7 @@ package beans;
 import java.io.Serializable;
 
 public class ReadingRecBean implements Serializable{
+  private int readingRecID;
   private String title;
   private String author;
   private String readStatus;
@@ -14,17 +15,28 @@ public class ReadingRecBean implements Serializable{
   
   public ReadingRecBean() { }
     
-  //本棚に本を新規登録
-  public ReadingRecBean(String title, String author, String readStatus) {
-    this.title = title;
+  //ログイン時に本棚の内容を取得
+  public ReadingRecBean(int readingRecID, String title, String author, String readStatus) {
+    this.readingRecID = readingRecID;
+	this.title = title;
     this.author = author;
     this.readStatus = readStatus;
     
   }
+  //本棚に本を新規登録
+  public ReadingRecBean(String title, String author, String readStatus) {
+	    this.title = title;
+	    this.author = author;
+	    this.readStatus = readStatus;
+	    
+	  }
   
   
 
   //ゲッターとセッター
+  public int getReadingRecID() { return readingRecID; }
+  public void setReadingRecID(int readingRecID) { this.readingRecID = readingRecID; }
+  
   public String getTitle() { return title; }
   public void setTitle(String title) { this.title = title; }
   
