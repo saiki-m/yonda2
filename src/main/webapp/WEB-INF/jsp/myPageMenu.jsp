@@ -7,7 +7,7 @@
     <div class="top-container">
 	  	<a href="MyPage"><img src="./img/myicon.png" alt="マイページ"></a>
 	  	
-	  	<h3><c:out value="${account.name}" />さん</h3>
+	  	<h3><c:out value="${accountInfo.name}" />さん</h3>
     	
     	<a href="BookShelf" class="btn">本棚</a>
     	<a href="Profile" class="btn">プロフィール</a>

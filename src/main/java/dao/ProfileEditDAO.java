@@ -34,7 +34,7 @@ public class ProfileEditDAO extends ConfigDB{
       //WHERE文の?に代入
       pStmt.setString(1, account.getName());
       pStmt.setString(2, account.getMailAd());
-      pStmt.setString(3, account.getHomeAddress());
+      pStmt.setString(3, account.getHomeAdd());
       pStmt.setInt(4, account.getAccountID());
 
       pStmt.executeUpdate();

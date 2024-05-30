@@ -29,14 +29,14 @@ public class AccountBean implements Serializable{
   
   
   //ログイン用
-  public AccountBean(String name, String password) {
+  public AccountBean(int accountID, String name, String password, String mailAd, String secret_q) {
+	    this.accountID = accountID;
 	    this.name = name;
 	    this.password = password;
+	    this.mailAd = mailAd;
+	    this.secret_q = secret_q;
   }
-  //ログイン用
-  public AccountBean(int accountID) {
-	    this.accountID = accountID;
-  }
+  
   
   //パスワード変更のための本人確認用
   public AccountBean(String name, String mailAd, String secret_q) {

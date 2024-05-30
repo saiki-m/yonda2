@@ -32,16 +32,13 @@ public class Login extends HttpServlet {
     String name = request.getParameter("name");
     String password = request.getParameter("password");
     
-    //入力情報をaccountインスタンスに保存。
-    AccountBean account = new AccountBean(name, password);
-    
     //データベースに接続。アカウントIDを見つけて取得する。
     LoginDAO dao = new LoginDAO();
-	AccountBean accountID = dao.findAccountID(name, password);
+	AccountBean accountInfo = dao.findAccount(name, password);
 	
 	// アカウントIDが見つからず、取得できなかったとき。
 	// ログイン失敗
-	if (accountID == null) { 
+	if (accountInfo == null) { 
 		
 		request.setAttribute("errorMsg", "ユーザ名、パスワードを正しく入力してください");
 		
@@ -54,11 +51,11 @@ public class Login extends HttpServlet {
     else {
     	//セッションスコープに保存。 マイページや本棚で使うため。
     	HttpSession session = request.getSession();
-    	session.setAttribute("account", account);
+    	session.setAttribute("accountInfo", accountInfo);
     	
     	//本棚に表示する読書記録の一覧を取得。
     	ReadingRecAddDAO dao2 = new ReadingRecAddDAO();
-    	List<ReadingRecBean> readingRecList = dao2.findAll();
+    	List<ReadingRecBean> readingRecList = dao2.findAll(accountInfo.getAccountID());
     	
     	//「bookShelf.jsp」、「ReadingRecAdd.java」で使うため、セッションスコープに保存。
     	session.setAttribute("readingRecList", readingRecList);

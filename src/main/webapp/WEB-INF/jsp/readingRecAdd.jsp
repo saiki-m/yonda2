@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,9 @@
   	  <jsp:include page = "myPageMenu.jsp" />
     
         <h2>読書記録を追加</h2>
+        <c:if test="${not empty errorMsg}">
+          <p><font color="red"><c:out value="${errorMsg}" /></font></p>
+        </c:if>
       	<form action="ReadingRecAdd" method="post">
 	        <input type="text" name="title" class="input-field" placeholder="タイトル" required>
 	        <input type="text" name="author" class="input-field" placeholder="作者" required>
