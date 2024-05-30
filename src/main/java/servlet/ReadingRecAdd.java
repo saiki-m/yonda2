@@ -30,14 +30,24 @@ public class ReadingRecAdd extends HttpServlet {
   	}
 	  
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // リクエストパラメータを取得
+	  int count2 = 0;
+	  int point2 = 0;
+	  
+	// リクエストパラメータを取得
     request.setCharacterEncoding("UTF-8");
     String title = request.getParameter("title");
     String author = request.getParameter("author");
     String readStatus = request.getParameter("readStatus");
+    String count = request.getParameter("count");
+    String point = request.getParameter("point");
+    String impression = request.getParameter("impression");
+    
+    count2 = Integer.parseInt(count);
+    point2 = Integer.parseInt(point);
+
     
     //入力情報をインスタンスに保存
-    ReadingRecBean readingRec = new ReadingRecBean(title, author, readStatus);
+    ReadingRecBean readingRec = new ReadingRecBean(title, author, readStatus, count2, point2, impression);
     
     HttpSession session = request.getSession();
     AccountBean accountInfo = (AccountBean) session.getAttribute("accountInfo");
@@ -62,7 +72,7 @@ public class ReadingRecAdd extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/readingRecAddResult.jsp");
         dispatcher.forward(request, response);
-	    //request.getAttribute("addRec");
+	    
 	}
 	
 	//追加できなかったとき

@@ -3,6 +3,9 @@ CREATE TABLE 読書状況 (読書状況ID INTEGER  NOT NULL AUTO_INCREMENT,
                        タイトル VARCHAR(100)  NOT NULL,
                        作者 VARCHAR(100) NOT NULL,
                        読書状況 VARCHAR(100)  NOT NULL,
+                       回数 INTEGER,
+                       点数 INTEGER,
+                       感想 VARCHAR(3000),
                        
                        PRIMARY KEY (読書状況ID),
                        FOREIGN KEY (アカウントID) REFERENCES アカウント(アカウントID)

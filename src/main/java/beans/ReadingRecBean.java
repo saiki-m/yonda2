@@ -11,23 +11,33 @@ public class ReadingRecBean implements Serializable{
   private String title;
   private String author;
   private String readStatus;
+  private int count;
+  private int point;
+  private String impression;
   
   
   public ReadingRecBean() { }
     
   //ログイン時に本棚の内容を取得
-  public ReadingRecBean(int readingRecID, String title, String author, String readStatus) {
+  public ReadingRecBean(int readingRecID, String title, String author, String readStatus, int count, int point, String impression) {
     this.readingRecID = readingRecID;
 	this.title = title;
     this.author = author;
     this.readStatus = readStatus;
+    this.count = count;
+    this.point = point;
+    this.impression = impression;
     
   }
+  
   //本棚に本を新規登録
-  public ReadingRecBean(String title, String author, String readStatus) {
+  public ReadingRecBean(String title, String author, String readStatus, int count, int point, String impression) {
 	    this.title = title;
 	    this.author = author;
 	    this.readStatus = readStatus;
+	    this.count = count;
+	    this.point = point;
+	    this.impression = impression;
 	    
 	  }
   
@@ -46,5 +56,13 @@ public class ReadingRecBean implements Serializable{
   public String getReadStatus() { return readStatus; }
   public void setReadStatus(String readStatus) { this.readStatus = readStatus; }
   
-  
+  public int getCount() { return count; }
+  public void setCount(int count) { this.count = count; }
+
+  public int getPoint() { return point; }
+  public void setPoint(int point) { this.point = point; }
+ 
+  public String getImpression() { return impression; }
+  public void setImpression(String impression) { this.impression = impression; }
+ 
 }

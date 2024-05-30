@@ -47,6 +47,10 @@
 		        <th>タイトル</th>
 		        <th>作者</th>
 		        <th>読書状況</th>
+		        <th>読書回数</th>
+		        <th>点数</th>
+		        <th>感想</th>
+		        
 		    </tr>
 		    
 		    
@@ -57,8 +61,11 @@
                     <td><c:out value="${Record.title}" /></td>
                     <td><c:out value="${Record.author}" /></td>
                     <td><c:out value="${Record.readStatus}" /></td>
-                    
-                    <td><button type="submit" formaction="MyPageEdit2">編集</button></td>
+                    <td><c:out value="${Record.count}" /></td>
+                    <td><c:out value="${Record.point}" /></td>
+                    <td><c:out value="${Record.impression}" /></td>
+                   
+                    <td><button type="submit" formaction="EditReadingRec">編集</button></td>
 		            <td><button type="submit" formaction="DeleteReadingRec">削除</button></td>
                     <input type="hidden" name="LoopIndex" value=<c:out value="${status.index}"/>>
                 

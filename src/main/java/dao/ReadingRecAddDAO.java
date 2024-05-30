@@ -24,8 +24,8 @@ public class ReadingRecAddDAO extends ConfigDB{
     try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
     	
       // SELECT文を準備
-      String sql = "INSERT INTO 読書状況(アカウントID, タイトル, 作者, 読書状況)"
-    		     + "VALUES (?, ?, ?, ?)";
+      String sql = "INSERT INTO 読書状況(アカウントID, タイトル, 作者, 読書状況, 回数, 点数, 感想)"
+    		     + "VALUES (?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
@@ -33,6 +33,9 @@ public class ReadingRecAddDAO extends ConfigDB{
       pStmt.setString(2, rec.getTitle());
       pStmt.setString(3, rec.getAuthor());
       pStmt.setString(4, rec.getReadStatus());
+      pStmt.setInt(5, rec.getCount());
+      pStmt.setInt(6, rec.getPoint());
+      pStmt.setString(7, rec.getImpression());
       
       // INSERT文を実行（resultには追加された行数が代入される）
       int result = pStmt.executeUpdate();
@@ -62,7 +65,7 @@ public class ReadingRecAddDAO extends ConfigDB{
 	    // データベースへ接続
 	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 	    	// SELECT文を準備
-	        String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況 FROM 読書状況 WHERE アカウントID = ?";
+	        String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況, 回数, 点数, 感想 FROM 読書状況 WHERE アカウントID = ?";
 	        
 	        
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -79,7 +82,12 @@ public class ReadingRecAddDAO extends ConfigDB{
 		          String title = rs.getString("タイトル");
 		          String author = rs.getString("作者");
 		          String readStatus = rs.getString("読書状況");
-		          ReadingRecBean record2 = new ReadingRecBean(ID, title, author, readStatus);
+		          int count = rs.getInt("回数");
+		          int point = rs.getInt("点数");
+		          String impression = rs.getString("感想");
+		          
+		          ReadingRecBean record2 = new ReadingRecBean(ID, title, author, 
+		        		         readStatus, count, point, impression);
 		          readingRecList.add(record2);
 		        }
 		    return readingRecList;

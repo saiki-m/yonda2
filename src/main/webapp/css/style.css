@@ -307,7 +307,7 @@ main {
 —----------------------------- */
 .bookshelf-table {
     max-width: 100%; /* 最大幅を100%に設定 */
-    width: auto; /* 幅を自動調整 */
+    width: 100%; /* 幅を自動調整 */
     border-collapse: collapse; /* セルのボーダーを結合 */
     border-radius: 10px; /* テーブル全体の角を丸くする */
     overflow: hidden; /* 角丸の部分を隠す */
@@ -320,14 +320,15 @@ main {
     padding: 10px; /* セルの余白 */
     border: 1px solid #F9B519; /* セルのボーダーの色を設定 */
     text-align: center; /* テキストを中央揃え */
-    width: calc(100% / 3); /* 3列に均等に分割 */
+    width: calc(100% / 6); /* 3列に均等に分割 */
     height: 50%; /* 2行に均等に分割 */
 }
 
 .bookshelf-table td {
     padding: 10px; /* セルの余白 */
     border: 1px solid #F9B519; /* セルのボーダーの色を設定 */
-    width: calc(100% / 3); /* 3列に均等に分割 */
+    text-align: center; /* テキストを中央揃え */
+    width: calc(100% / 6); /* 3列に均等に分割 */
     height: 50%; /* 2行に均等に分割 */
 }
 

@@ -47,7 +47,7 @@ public class LoginDAO extends ConfigDB{
 	        String pass = rs.getString("パスワード");
 	        String mailAd = rs.getString("メールアドレス");
 	        String secret_q = rs.getString("秘密の質問");
-	        System.out.println(ID);
+	        
 	        account = new AccountBean(ID, accountName, pass, mailAd, secret_q);
 	      }
 	      
