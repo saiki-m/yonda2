@@ -8,18 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import beans.AccountBean;
-
 public class RePassIdDAO extends ConfigDB{
   
 	
-  //63行目の「return accountID」ができるよう初期設定しておく。
-  AccountBean accountID = null;
   
-  public AccountBean findAccountID(AccountBean account) {
+  public Integer findAccountID(String name, String mailAd, String secret_q) {
 	  
 	//親クラスConfigDBのメソッドを利用
 		ReadJDBC_Driver();
+		
+		int accountID = 0;
 	
     // データベースへ接続
     try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
@@ -30,26 +28,26 @@ public class RePassIdDAO extends ConfigDB{
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      pStmt.setString(1, account.getName());
-      pStmt.setString(2, account.getMailAd());
-      pStmt.setString(3, account.getSecret_q());
+      pStmt.setString(1, name);
+      pStmt.setString(2, mailAd);
+      pStmt.setString(3, secret_q);
       
       // SELECTを実行し、結果表を取得
       ResultSet rs = pStmt.executeQuery();
       
 	      // 結果表に格納されたレコードの内容をaccountIDに追加 
 	      while (rs.next()) {
-	        int ID = rs.getInt("アカウントID");
-	        accountID = new AccountBean(ID);
+	        accountID = rs.getInt("アカウントID");
 	      }
+	      
     }  
       //tryの中でエラーが出たら、catchのみ実行する
     catch (SQLException e) {
       e.printStackTrace();
-      return null;
+      return 0;
     }
     
-  //アカウントIDを取得できたとき
-  return accountID;      //accountIDインスタンスにアカウントIDが入っている状態。
+	return accountID;
+        
   }
 }

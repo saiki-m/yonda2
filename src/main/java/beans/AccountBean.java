@@ -2,7 +2,6 @@
 //参考サイト→「https://camp.trainocate.co.jp/magazine/whats-javabeans/」
 
 
-
 package beans;
 
 import java.io.Serializable;
@@ -23,10 +22,8 @@ public class AccountBean implements Serializable{
     this.name = name;
     this.password = password;
     this.mailAd = mailAd;
-    this.secret_q = secret_q;
-    
+    this.secret_q = secret_q; 
   }
-  
   
   //ログイン用
   public AccountBean(int accountID, String name, String password, String mailAd, String secret_q) {
@@ -37,17 +34,6 @@ public class AccountBean implements Serializable{
 	    this.secret_q = secret_q;
   }
   
-  
-  //パスワード変更のための本人確認用
-  public AccountBean(String name, String mailAd, String secret_q) {
-	    this.name = name;
-	    this.mailAd = mailAd;
-	    this.secret_q = secret_q;
-  } 
-  //パスワード変更
-  public AccountBean(String password) {
-	    this.password = password;
-  }
   
   //ゲッターとセッター
   public int getAccountID() { return accountID; }

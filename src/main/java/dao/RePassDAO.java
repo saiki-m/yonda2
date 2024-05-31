@@ -6,12 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import beans.AccountBean;
-
 public class RePassDAO extends ConfigDB{
   
 	
-  public void rePass(AccountBean account, AccountBean account2) {
+  public void rePass(String password, int accountID) {
 	   
 	//親クラスConfigDBのメソッドを利用
 		ReadJDBC_Driver();
@@ -25,8 +23,8 @@ public class RePassDAO extends ConfigDB{
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      pStmt.setString(1, account.getPassword());
-      pStmt.setInt(2, account2.getAccountID());
+      pStmt.setString(1, password);
+      pStmt.setInt(2, accountID);
       
       pStmt.executeUpdate();
       conn.commit();

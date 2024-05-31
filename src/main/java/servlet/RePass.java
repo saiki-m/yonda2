@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import beans.AccountBean;
 import dao.RePassDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,7 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/RePass")
 public class RePass extends HttpServlet {
@@ -22,25 +20,18 @@ public class RePass extends HttpServlet {
     
     String password = request.getParameter("password");
     String password2 = request.getParameter("password2");
+    String accountID = request.getParameter("accountID");
     
-    AccountBean account5 = new AccountBean(password);
-	
+    int accountID2 = Integer.parseInt(accountID);
+    
     //パスワードが一致していたら
     if(password.equals(password2)){
-    	//セッションスコープからインスタンスを取得。
-    	//RePassIdDAOで取得したアカウントIDを使用。
-    	HttpSession session = request.getSession();
-        AccountBean accountID = (AccountBean)session.getAttribute("accountID");
-        
+    	 
         RePassDAO dao = new RePassDAO();
-    	dao.rePass(account5, accountID);   //パスワードを再設定する。
-    	
-    	//不要となったセッションスコープ内のインスタンスを削除
-    	session.removeAttribute("accountID");
+    	dao.rePass(password, accountID2);   //パスワードを再設定する。
     	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassResult.jsp");
-        dispatcher.forward(request, response);
-    	
+        dispatcher.forward(request, response);  	
     }
     
     
