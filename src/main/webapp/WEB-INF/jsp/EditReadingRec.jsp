@@ -37,7 +37,9 @@
 			
 			<textarea name="impression" class="input-field" cols="20" maxlength="3000" rows="5" placeholder="感想を入力してください"><c:out value="${Record.impression}" /></textarea>
 			
-	        <button type="submit" class="cert-btn">保存</button>
+	        <button type="submit" name="Save" value=<c:out value="${Record.readingRecID}"/> class="cert-btn">保存</button>
+	        
+	        <input type="hidden" name="LoopIndex" value=<c:out value="${LoopIndex}"/>>
 	     </form>
   </main>
 </body>

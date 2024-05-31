@@ -12,7 +12,7 @@ import beans.ReadingRecBean;
 public class EditReadingRecDAO extends ConfigDB{
   
   //本棚に本を追加
-  public boolean edit(ReadingRecBean rec) {
+  public boolean update(ReadingRecBean rec) {
 		
 	//親クラスConfigDBのメソッドを利用
 		ReadJDBC_Driver();
