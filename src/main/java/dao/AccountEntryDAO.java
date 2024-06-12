@@ -7,12 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import beans.AccountBean;
-
 public class AccountEntryDAO extends ConfigDB{
 
 	
-  public boolean create(AccountBean account) {
+  public boolean create(String[] account) {
 	  
 	//親クラスConfigDBのメソッドを利用
 	//JDBCドライバーを読み込む
@@ -28,10 +26,10 @@ public class AccountEntryDAO extends ConfigDB{
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      pStmt.setString(1, account.getName());
-      pStmt.setString(2, account.getPassword());
-      pStmt.setString(3, account.getMailAd());
-      pStmt.setString(4, account.getSecret_q());
+      pStmt.setString(1, account[0]);
+      pStmt.setString(2, account[1]);
+      pStmt.setString(3, account[2]);
+      pStmt.setString(4, account[3]);
 
       // INSERT文を実行（resultには追加された行数が代入される）
       int result = pStmt.executeUpdate();

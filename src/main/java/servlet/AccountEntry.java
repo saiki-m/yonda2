@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import beans.AccountBean;
 import dao.AccountEntryDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,19 +22,23 @@ public class AccountEntry extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // リクエストパラメータを取得
     request.setCharacterEncoding("UTF-8");
-    String name = request.getParameter("name");
-    String password = request.getParameter("password");
-    String mailAd = request.getParameter("mailAd");
-    String secret_q = request.getParameter("secret_q");
     
-    //Accountインスタンスaccountに入力内容を保存
-    AccountBean account = new AccountBean(name, password, mailAd, secret_q);
+    String[] a = {"name", "password", "mailAd", "secret_q"};
+    
+    for(int i = 0; i < a.length; i++) {
+    	a[i] = request.getParameter(a[i]);
+    }    
      
+   
     AccountEntryDAO dao = new AccountEntryDAO();
-    boolean newAccount = dao.create(account);   //dao.create(account)がTrueで、アカウント登録される。
-	
+    boolean newAccount = dao.create(a);   
+    
     //登録OK
     if(newAccount) {
+    	
+//    	DefaultProfileDAO dao2 = new DefaultProfileDAO();
+//    	dao2.DefaultCreate();
+//    	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp");
         dispatcher.forward(request, response); 
 	}
