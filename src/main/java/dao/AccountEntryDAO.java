@@ -5,6 +5,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AccountEntryDAO extends ConfigDB{
@@ -33,6 +34,9 @@ public class AccountEntryDAO extends ConfigDB{
 
       // INSERT文を実行（resultには追加された行数が代入される）
       int result = pStmt.executeUpdate();
+      
+      insertAccountID_IntoProfile();
+      
       if (result != 1) {
         return false;
       }
@@ -47,4 +51,68 @@ public class AccountEntryDAO extends ConfigDB{
     //できたとき
     return true;
   }
+  
+  public boolean insertAccountID_IntoProfile() {
+	  
+	    ReadJDBC_Driver();
+	    
+	    // データベースへ接続
+	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	    	
+	      String sql = "INSERT INTO プロフィール(アカウントID) VALUES (?)";
+	        
+	      PreparedStatement pStmt = conn.prepareStatement(sql);
+	      
+	    //WHERE文の?に代入
+	      pStmt.setInt(1, getRegistAccountID());
+	      
+	      // INSERT文を実行（resultには追加された行数が代入される）
+	      int result = pStmt.executeUpdate();
+	      if (result != 1) {
+	        return false;
+	      }
+		      
+	    }  
+	      //try文の中でエラーが出たとき実行する
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	      return false;
+	    }
+	    
+	    //できたとき
+	    return true;
+	  }
+  
+  public int getRegistAccountID() {
+	  
+	    int accountID = 0;
+		
+	    ReadJDBC_Driver();
+	    
+	    // データベースへ接続
+	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	    	
+	      String sql = "SELECT MAX(アカウントID) AS アカウントID FROM アカウント";
+	        
+	      PreparedStatement pStmt = conn.prepareStatement(sql);
+	      
+	   // SELECTを実行し、結果表を取得
+	      ResultSet rs = pStmt.executeQuery();
+	      
+		      // 結果表にあるアカウントIDをaccountIDインスタンスに保存。
+		      while (rs.next()) {
+		          accountID = rs.getInt("アカウントID");
+		      }
+		      
+	    }  
+	      //try文の中でエラーが出たとき実行する
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	      return 0;
+	    }
+	    
+	    //できたとき
+	    return accountID;
+	  }
+  
 }

@@ -22,13 +22,14 @@
     	<h2>プロフィールの編集</h2>
 
 	    	<form action="Profile" method="post">
-		        <input type="text" name="birthday" class="input-field" placeholder="生年月日">
 		        <select name="gender" class="input-field" placeholder="性別">
 					<option value="無回答">無回答</option>
 					<option value="男">男</option>
 					<option value="女">女</option>
 				</select>
-		        <input type="text" name="Profession" class="input-field" placeholder="職業">
+		        <input type="text" name="birthday" class="input-field" placeholder="生年月日">
+		        
+		        <input type="text" name="profession" class="input-field" placeholder="職業">
 		       
 		        <%--「https://yuyauver98.me/template-html-prefectures/」からコピペ --%>
                 <select name="prefectures" class="input-field" placeholder="在住都道府県">
@@ -83,12 +84,8 @@
 				</select>
 				
                 <input type="text" name="keyword" class="input-field" placeholder="パーソナルタグ"><br>
-                <input type="text" name="favorite_1" class="input-field" placeholder="好きなジャンル1位"><br>
-                <input type="text" name="favorite_2" class="input-field" placeholder="好きなジャンル2位"><br>
-                <input type="text" name="favorite_3" class="input-field" placeholder="好きなジャンル3位"><br>
-                <input type="text" name="likeAuthor_1" class="input-field" placeholder="好きな作家1位"><br>
-                <input type="text" name="likeAuthor_2" class="input-field" placeholder="好きな作家2位"><br>
-                <input type="text" name="likeAuthor_3" class="input-field" placeholder="好きな作家3位"><br>
+                <input type="text" name="genru" class="input-field" placeholder="好きなジャンル"><br>
+                <input type="text" name="author" class="input-field" placeholder="好きな作家"><br>
                 <input type="text" name="book_1" class="input-field" placeholder="お気に入りの本1位"><br>
                 <input type="text" name="book_2" class="input-field" placeholder="お気に入りの本2位"><br>
                 <input type="text" name="book_3" class="input-field" placeholder="お気に入りの本3位"><br>
