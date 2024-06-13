@@ -22,6 +22,7 @@ public class ProfileBean implements Serializable{
   private String book_1;
   private String book_2;
   private String book_3;
+  private String[] strProfileInfo;
   
 
   
@@ -51,6 +52,10 @@ public class ProfileBean implements Serializable{
  
   }
   
+  public ProfileBean(Date birthday, String[] strProfileInfo) {
+	  this.birthday = birthday;
+	  this.strProfileInfo = strProfileInfo;
+  }
   
   //ゲッターとセッター
   public int getProfileID() { return profileID; }
@@ -98,4 +103,6 @@ public class ProfileBean implements Serializable{
   public String getBook_3() { return book_3; }
   public void setBook_3(String book_3) { this.book_3 = book_3; }
   
+  public String[] getStrProfileInfo() { return strProfileInfo; }
+  public void setStrProfileInfo(String[] strProfileInfo) { this.strProfileInfo = strProfileInfo; }
 }

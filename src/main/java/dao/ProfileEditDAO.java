@@ -2,10 +2,12 @@
 
 package dao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import beans.AccountBean;
+import beans.ProfileBean;
 
 
 
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 public class ProfileEditDAO extends ConfigDB{
 
 	
-  public void update(Date birth, String[] account) {
+  public void update(ProfileBean profileInfo, AccountBean account) {
 	  
 	//親クラスConfigDBのメソッドを利用
 	//JDBCドライバーを読み込む
@@ -33,10 +35,21 @@ public class ProfileEditDAO extends ConfigDB{
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      pStmt.setString(1, account[0]);
-      pStmt.setDate(2, birth);
-      pStmt.setString(3, account.getHomeAddress());
-      pStmt.setInt(4, account.getAccountID());
+      for(int i = 0; i < profileInfo.getStrProfileInfo().length + 1; i++) {
+    	  //生年月日のとき
+    	  if(i == 1) {
+    		  pStmt.setDate(i+1, profileInfo.getBirthday());
+    	 	  continue; 
+    	  }
+    	  
+    	  pStmt.setString(i+1, profileInfo.getStrProfileInfo()[i]);
+    	  
+    	  //プロフィールIDのとき
+    	  if(i == profileInfo.getStrProfileInfo().length + 1) {
+    		  pStmt.setInt(i+1, account.getProfileID());
+    	  }
+      }
+
 
       pStmt.executeUpdate();
       conn.commit();
@@ -46,7 +59,6 @@ public class ProfileEditDAO extends ConfigDB{
     catch (SQLException e) {
       e.printStackTrace();   
     }
-    
     
   }
 }

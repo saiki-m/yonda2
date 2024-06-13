@@ -5,6 +5,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Date;
 
+import beans.ProfileBean;
 import dao.ProfileEditDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,14 +39,15 @@ public class Profile extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  request.setCharacterEncoding("UTF-8");
 	  
-	  String[] a = {"birthday", "gender", "profession", "prefectures", "keyword",
+	  String[] inputInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
 			  			"genru", "author", "book_1", "book_2", "book_3"};
 	    
-	    for(int i = 0; i < a.length; i++) {
-	    	a[i] = request.getParameter(a[i]);
-	    }    
+	    for(int i = 0; i < inputInfo.length; i++) {
+	    	inputInfo[i] = request.getParameter(inputInfo[i]);
+	    }
+	    
+//    String gender = request.getParameter("gender");
 //	  String birthday = request.getParameter("birthday");
-//	  String gender = request.getParameter("gender");
 //	  String profession = request.getParameter("profession");
 //	  String prefectures = request.getParameter("prefectures");
 //	  String keyword = request.getParameter("keyword");
@@ -59,18 +61,13 @@ public class Profile extends HttpServlet {
 //	  String book_2 = request.getParameter("book_2");
 //	  String book_3 = request.getParameter("book_3");
 	  
-	  Date Birthday = java.sql.Date.valueOf(a[0]);
+	  Date Birthday = java.sql.Date.valueOf(inputInfo[1]);
 	    
-//	  ProfileBean profile = new ProfileBean(Birthday, gender, profession,
-//			                                   prefectures, keyword, genru_1, 
-//			                                   genru_2, genru_3, author_1,
-//			                                   author_2, author_3, book_1,
-//			                                   book_2, book_3);
+	  ProfileBean profile = new ProfileBean(Birthday, inputInfo);
 	  
-	 //ProfileBean profile = new ProfileBean(Birthday, );
 
 	  ProfileEditDAO dao = new ProfileEditDAO();
-	  dao.update(Birthday, a);
+	  dao.update(profile, account);
 	  
 	  
 	  
