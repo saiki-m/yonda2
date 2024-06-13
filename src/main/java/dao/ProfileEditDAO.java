@@ -2,11 +2,10 @@
 
 package dao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import beans.AccountBean;
 
 
 
@@ -16,7 +15,7 @@ import beans.AccountBean;
 public class ProfileEditDAO extends ConfigDB{
 
 	
-  public void update(AccountBean account) {
+  public void update(Date birth, String[] account) {
 	  
 	//親クラスConfigDBのメソッドを利用
 	//JDBCドライバーを読み込む
@@ -27,14 +26,16 @@ public class ProfileEditDAO extends ConfigDB{
       
     	
       // SELECT文を準備
-      String sql = "UPDATE アカウント SET 氏名 = ?, メールアドレス = ?, 住所 = ?  WHERE アカウントID = ? ";
+      String sql = "UPDATE プロフィール SET 性別 = ?, 生年月日 = ?, 職業 = ?, 在住都道府県 = ?, "
+      		+ "パーソナルタグ = ?, 興味のあるジャンル = ?, 好きな作家 = ?, お気に入り1位 = ?,"
+      		+ " お気に入り2位 = ?, お気に入り3位 = ? WHERE プロフィールID = ? ";
         
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      pStmt.setString(1, account.getName());
-      pStmt.setString(2, account.getMailAd());
-      pStmt.setString(3, account.getHomeAdd());
+      pStmt.setString(1, account[0]);
+      pStmt.setDate(2, birth);
+      pStmt.setString(3, account.getHomeAddress());
       pStmt.setInt(4, account.getAccountID());
 
       pStmt.executeUpdate();
