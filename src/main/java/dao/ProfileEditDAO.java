@@ -30,24 +30,25 @@ public class ProfileEditDAO extends ConfigDB{
       // SELECT文を準備
       String sql = "UPDATE プロフィール SET 性別 = ?, 生年月日 = ?, 職業 = ?, 在住都道府県 = ?, "
       		+ "パーソナルタグ = ?, 興味のあるジャンル = ?, 好きな作家 = ?, お気に入り1位 = ?,"
-      		+ " お気に入り2位 = ?, お気に入り3位 = ? WHERE プロフィールID = ? ";
+      		+ " お気に入り2位 = ?, お気に入り3位 = ? WHERE アカウントID = ? ";
         
       PreparedStatement pStmt = conn.prepareStatement(sql);
       
       //WHERE文の?に代入
-      for(int i = 0; i < profileInfo.getStrProfileInfo().length + 1; i++) {
+      for(int i = 0; i < (profileInfo.getStrProfileInfo().length + 1); i++) {
     	  //生年月日のとき
     	  if(i == 1) {
     		  pStmt.setDate(i+1, profileInfo.getBirthday());
     	 	  continue; 
     	  }
     	  
-    	  pStmt.setString(i+1, profileInfo.getStrProfileInfo()[i]);
-    	  
-    	  //プロフィールIDのとき
-    	  if(i == profileInfo.getStrProfileInfo().length + 1) {
-    		  pStmt.setInt(i+1, account.getProfileID());
+    	  //アカウントIDのとき
+    	  if(i == profileInfo.getStrProfileInfo().length) {
+    		  pStmt.setInt(i+1, account.getAccountID());
+    		  break;
     	  }
+    	  
+    	  pStmt.setString(i+1, profileInfo.getStrProfileInfo()[i]);
       }
 
 

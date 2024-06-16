@@ -3,12 +3,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import beans.AccountBean;
-import beans.ReadingRecBean;
 import dao.LoginDAO;
-import dao.ReadingRecAddDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -54,12 +51,12 @@ public class Login extends HttpServlet {
     	session.setAttribute("accountInfo", accountInfo);
     	
     	//本棚に表示する読書記録の一覧を取得。
-    	ReadingRecAddDAO dao2 = new ReadingRecAddDAO();
-    	List<ReadingRecBean> readingRecList = dao2.findAll(accountInfo.getAccountID());
-    	
-    	//「bookShelf.jsp」、「ReadingRecAdd.java」で使うため、セッションスコープに保存。
-    	session.setAttribute("readingRecList", readingRecList);
-    	
+//    	ReadingRecAddDAO dao2 = new ReadingRecAddDAO();
+//    	List<ReadingRecBean> readingRecList = dao2.findAll(accountInfo.getAccountID());
+//    	
+//    	//「bookShelf.jsp」、「ReadingRecAdd.java」で使うため、セッションスコープに保存。
+//    	session.setAttribute("readingRecList", readingRecList);
+//    	
     	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp");
         dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
     	

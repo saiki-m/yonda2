@@ -5,6 +5,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.Date;
 
+import beans.AccountBean;
 import beans.ProfileBean;
 import dao.ProfileEditDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
@@ -41,35 +43,25 @@ public class Profile extends HttpServlet {
 	  
 	  String[] inputInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
 			  			"genru", "author", "book_1", "book_2", "book_3"};
+
+	  for(int i = 0; i < inputInfo.length; i++) {
+	      inputInfo[i] = request.getParameter(inputInfo[i]);
+	  }
 	    
-	    for(int i = 0; i < inputInfo.length; i++) {
-	    	inputInfo[i] = request.getParameter(inputInfo[i]);
-	    }
-	    
-//    String gender = request.getParameter("gender");
-//	  String birthday = request.getParameter("birthday");
-//	  String profession = request.getParameter("profession");
-//	  String prefectures = request.getParameter("prefectures");
-//	  String keyword = request.getParameter("keyword");
-//	  String genru_1 = request.getParameter("genru_1");
-//	  String genru_2 = request.getParameter("genru_2");
-//	  String genru_3 = request.getParameter("genru_3");
-//	  String author_1 = request.getParameter("author_1");
-//	  String author_2 = request.getParameter("author_2");
-//	  String author_3 = request.getParameter("author_3");
-//	  String book_1 = request.getParameter("book_1");
-//	  String book_2 = request.getParameter("book_2");
-//	  String book_3 = request.getParameter("book_3");
-	  
+
 	  Date Birthday = java.sql.Date.valueOf(inputInfo[1]);
 	    
 	  ProfileBean profile = new ProfileBean(Birthday, inputInfo);
 	  
-
+	  HttpSession session = request.getSession();
+		
+	  AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
+		
 	  ProfileEditDAO dao = new ProfileEditDAO();
-	  dao.update(profile, account);
+	  dao.update(profile, accountInfo);
 	  
-	  
+	  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/profile.jsp");
+      dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
 	  
   }
 }

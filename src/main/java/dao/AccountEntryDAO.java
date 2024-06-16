@@ -91,7 +91,8 @@ public class AccountEntryDAO extends ConfigDB{
 	    
 	    // データベースへ接続
 	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-	    	
+	      
+	      //アカウントテーブルに登録されるアカウントIDはオートインクリメントのため、MAX関数で取得。	
 	      String sql = "SELECT MAX(アカウントID) AS アカウントID FROM アカウント";
 	        
 	      PreparedStatement pStmt = conn.prepareStatement(sql);
