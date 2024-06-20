@@ -35,23 +35,17 @@ public class AccountBean implements Serializable{
   }
   
   
-  //ゲッターとセッター
+  //ゲッター
   public int getAccountID() { return accountID; }
-  public void setAccountID(int accountID) { this.accountID = accountID; }
   
   public String getName() { return name; }
-  public void setName(String name) { this.name = name; }
   
   public String getPassword() { return password; }
-  public void setPassword(String password) { this.password = password; }
   
   public String getMailAd() { return mailAd; }
-  public void setMailAd(String mailAd) { this.mailAd = mailAd; }
   
   public String getSecret_q() { return secret_q; }
-  public void setSecret_q(String secret_q) { this.secret_q = secret_q; }
   
   public int getProfileID() { return profileID; }
-  public void setProfileID(int profileID) { this.profileID = profileID; }
   
 }

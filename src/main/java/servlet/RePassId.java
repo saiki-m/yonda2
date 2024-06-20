@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ *   パスワード変更する前の本人確認画面
+ */
 @WebServlet("/RePassId")
 public class RePassId extends HttpServlet {
   private static final long serialVersionUID = 1L; 
@@ -24,7 +27,10 @@ public class RePassId extends HttpServlet {
   }  
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // 入力した名前、メールアドレス、秘密の質問を取得
+    
+	String forwardPass = null;
+	
+	// 入力した名前、メールアドレス、秘密の質問を取得
     request.setCharacterEncoding("UTF-8");
     String name = request.getParameter("name");
     String mailAd = request.getParameter("mailAd");
@@ -39,21 +45,19 @@ public class RePassId extends HttpServlet {
 	// アカウントIDが見つからず、取得できなかったとき。
 	// 失敗
 	if (accountID == 0) { 
-		request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassId.jsp");
-        dispatcher.forward(request, response); 
+		request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");		
+		forwardPass = "WEB-INF/jsp/rePassId.jsp";
 	}
 	
 	//アカウントIDが見つかったとき
     //パスワード再設定画面へ
     else {
-    	//リクエストスコープに保存
     	request.setAttribute("accountID", accountID);
-   
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePass.jsp");
-        dispatcher.forward(request, response);    
+    	forwardPass = "WEB-INF/jsp/rePass.jsp";
     }
+	
+	RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPass);
+	dispatcher.forward(request, response);    
 	
   }
 }
