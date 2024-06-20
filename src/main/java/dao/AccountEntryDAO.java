@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class AccountEntryDAO extends ConfigDB{
 
 	
-  public boolean create(String[] account) {
+  public void create(String[] account) {
 	  
 	//親クラスConfigDBのメソッドを利用
 	//JDBCドライバーを読み込む
@@ -33,23 +33,16 @@ public class AccountEntryDAO extends ConfigDB{
       pStmt.setString(4, account[3]);
 
       // INSERT文を実行（resultには追加された行数が代入される）
-      int result = pStmt.executeUpdate();
+      pStmt.executeUpdate();
       
       insertAccountID_IntoProfile();
-      
-      if (result != 1) {
-        return false;
-      }
-	      
+         
     }  
       //try文の中でエラーが出たとき実行する
     catch (SQLException e) {
       e.printStackTrace();
-      return false;
     }
     
-    //できたとき
-    return true;
   }
   
   public boolean insertAccountID_IntoProfile() {
