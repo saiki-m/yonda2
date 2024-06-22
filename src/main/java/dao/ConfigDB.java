@@ -21,5 +21,22 @@ public class ConfigDB{
      }
 	    
    }
+
+
+	public String getJDBC_URL() {
+		return JDBC_URL;
+	}
+	
+	
+	public String getDB_USER() {
+		return DB_USER;
+	}
+	
+	
+	public String getDB_PASS() {
+		return DB_PASS;
+	}
+	   
+   
 }
 

@@ -51,6 +51,7 @@ public class LoginDAO extends ConfigDB{
 	        account = new AccountBean(ID, accountName, pass, mailAd, secret_q);
 	      }
 	      
+	      
     }  
       //tryの中でエラーが出たら、catchのみ実行する
     catch (SQLException e) {

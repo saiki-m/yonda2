@@ -28,7 +28,7 @@ public class RePassId extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
-	String forwardPass = null;
+	String forwardPass = "WEB-INF/jsp/rePassId.jsp";
 	
 	// 入力した名前、メールアドレス、秘密の質問を取得
     request.setCharacterEncoding("UTF-8");
@@ -46,7 +46,6 @@ public class RePassId extends HttpServlet {
 	// 失敗
 	if (accountID == 0) { 
 		request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");		
-		forwardPass = "WEB-INF/jsp/rePassId.jsp";
 	}
 	
 	//アカウントIDが見つかったとき

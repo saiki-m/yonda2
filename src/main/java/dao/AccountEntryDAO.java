@@ -8,17 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountEntryDAO extends ConfigDB{
+public class AccountEntryDAO{
 
+	private ConfigDB configDB;
 	
   public void create(String[] account) {
 	  
 	//親クラスConfigDBのメソッドを利用
 	//JDBCドライバーを読み込む
-		ReadJDBC_Driver();
+		configDB.ReadJDBC_Driver();
     
     // データベースへ接続
-    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+    try (Connection conn = DriverManager.getConnection(configDB.getJDBC_URL(), configDB.getDB_USER(), configDB.getDB_PASS())) {
     	
       // SELECT文を準備。プロフィールIDはNULLのまま。プロフィール編集したときに更新する。
       String sql = "INSERT INTO アカウント(アカウント名, パスワード, メールアドレス, 秘密の質問)\r\n"
@@ -45,68 +46,55 @@ public class AccountEntryDAO extends ConfigDB{
     
   }
   
-  public boolean insertAccountID_IntoProfile() {
+  public void insertAccountID_IntoProfile() {
 	  
-	    ReadJDBC_Driver();
+	  configDB.ReadJDBC_Driver();
 	    
 	    // データベースへ接続
-	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	    try (Connection conn = DriverManager.getConnection(configDB.getJDBC_URL(), configDB.getDB_USER(), configDB.getDB_PASS())) {
 	    	
 	      String sql = "INSERT INTO プロフィール(アカウントID) VALUES (?)";
 	        
 	      PreparedStatement pStmt = conn.prepareStatement(sql);
 	      
-	    //WHERE文の?に代入
+	      //WHERE文の?に代入
 	      pStmt.setInt(1, getRegistAccountID());
 	      
 	      // INSERT文を実行（resultには追加された行数が代入される）
-	      int result = pStmt.executeUpdate();
-	      if (result != 1) {
-	        return false;
-	      }
-		      
+	      pStmt.executeUpdate();
+	    
 	    }  
-	      //try文の中でエラーが出たとき実行する
 	    catch (SQLException e) {
 	      e.printStackTrace();
-	      return false;
 	    }
 	    
-	    //できたとき
-	    return true;
 	  }
   
-  public int getRegistAccountID() {
+    public int getRegistAccountID() {
 	  
 	    int accountID = 0;
 		
-	    ReadJDBC_Driver();
+	    configDB.ReadJDBC_Driver();
 	    
-	    // データベースへ接続
-	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-	      
-	      //アカウントテーブルに登録されるアカウントIDはオートインクリメントのため、MAX関数で取得。	
-	      String sql = "SELECT MAX(アカウントID) AS アカウントID FROM アカウント";
-	        
-	      PreparedStatement pStmt = conn.prepareStatement(sql);
-	      
-	   // SELECTを実行し、結果表を取得
-	      ResultSet rs = pStmt.executeQuery();
-	      
-		      // 結果表にあるアカウントIDをaccountIDインスタンスに保存。
-		      while (rs.next()) {
-		          accountID = rs.getInt("アカウントID");
-		      }
+	    try (Connection conn = DriverManager.getConnection(configDB.getJDBC_URL(), configDB.getDB_USER(), configDB.getDB_PASS())) {
+	    	//アカウントテーブルに登録されるアカウントIDはオートインクリメントのため、MAX関数で取得。	
+		    String sql = "SELECT MAX(アカウントID) AS アカウントID FROM アカウント";
 		      
+		    PreparedStatement pStmt = conn.prepareStatement(sql);
+		      
+		    ResultSet rs = pStmt.executeQuery();
+		    
+			    while (rs.next()) {
+			        accountID = rs.getInt("アカウントID");
+			    }
+
+			return accountID;
 	    }  
-	      //try文の中でエラーが出たとき実行する
 	    catch (SQLException e) {
-	      e.printStackTrace();
-	      return 0;
+	        e.printStackTrace();
+	        return 0;
 	    }
 	    
-	    //できたとき
-	    return accountID;
-	  }
-  
+    }
+
 }
