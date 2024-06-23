@@ -7,45 +7,46 @@ package beans;
 import java.io.Serializable;
 
 public class AccountBean implements Serializable{
-  private int accountID;
-  private String name;
-  private String password;
-  private String mailAd;
-  private String secret_q;
-  private int profileID;
-
-  
-  public AccountBean() { }
-  
-  //アカウント登録用
-  public AccountBean(String name, String password, String mailAd, String secret_q) {
-    this.name = name;
-    this.password = password;
-    this.mailAd = mailAd;
-    this.secret_q = secret_q; 
-  }
-  
-  //ログイン用
-  public AccountBean(int accountID, String name, String password, String mailAd, String secret_q) {
+	
+	private int accountID;
+	private String name;
+	private String password;
+	private String mailAd;
+	private String secret_q;
+	private int profileID;
+	
+	
+	public AccountBean() { }
+	
+	//アカウント登録用
+	public AccountBean(String name, String password, String mailAd, String secret_q) {
+		this.name = name;
+		this.password = password;
+		this.mailAd = mailAd;
+		this.secret_q = secret_q; 
+	}
+	
+	//ログイン用
+	public AccountBean(int accountID, String name, String password, String mailAd, String secret_q) {
 	    this.accountID = accountID;
 	    this.name = name;
 	    this.password = password;
 	    this.mailAd = mailAd;
 	    this.secret_q = secret_q;
-  }
-  
-  
-  //ゲッター
-  public int getAccountID() { return accountID; }
-  
-  public String getName() { return name; }
-  
-  public String getPassword() { return password; }
-  
-  public String getMailAd() { return mailAd; }
-  
-  public String getSecret_q() { return secret_q; }
-  
-  public int getProfileID() { return profileID; }
-  
+	}
+	
+	
+	//ゲッター
+	public int getAccountID() { return accountID; }
+	
+	public String getName() { return name; }
+	
+	public String getPassword() { return password; }
+	
+	public String getMailAd() { return mailAd; }
+	
+	public String getSecret_q() { return secret_q; }
+	
+	public int getProfileID() { return profileID; }
+	
 }

@@ -18,50 +18,48 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
-  private static final long serialVersionUID = 1L; 
-  
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  
-	  request.setCharacterEncoding("UTF-8");
-	  String edit = request.getParameter("edit");
-	  
-	  //マイページの「プロフィール」ボタンを押したとき
-	  if(edit == null) {
-		  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/profile.jsp");
-	      dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-	  }
-	  
-	  //プロフィールページの「編集」ボタンを押したとき
-	  else if(edit.equals("done")){
-		  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/profileEdit.jsp");
-	      dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-	  }
-  }  
-
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  request.setCharacterEncoding("UTF-8");
-	  
-	  String[] inputInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
-			  			"genru", "author", "book_1", "book_2", "book_3"};
-
-	  for(int i = 0; i < inputInfo.length; i++) {
-	      inputInfo[i] = request.getParameter(inputInfo[i]);
-	  }
-	    
-
-	  Date Birthday = java.sql.Date.valueOf(inputInfo[1]);
-	    
-	  ProfileBean profile = new ProfileBean(Birthday, inputInfo);
-	  
-	  HttpSession session = request.getSession();
+	private static final long serialVersionUID = 1L;
+	
+	String path = "WEB-INF/jsp/profile.jsp";
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	  AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
+		request.setCharacterEncoding("UTF-8");
+		String edit = request.getParameter("edit");
 		
-	  ProfileEditDAO dao = new ProfileEditDAO();
-	  dao.update(profile, accountInfo);
-	  
-	  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/profile.jsp");
-      dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-	  
-  }
+		if(edit.equals("done")) {
+			//プロフィールページの「編集」ボタンを押したとき
+			path = "WEB-INF/jsp/profileEdit.jsp";
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+	}  
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		String[] inputInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
+				"genru", "author", "book_1", "book_2", "book_3"};
+		
+		for(int i = 0; i < inputInfo.length; i++) {
+			inputInfo[i] = request.getParameter(inputInfo[i]);
+		}
+		
+		
+		Date Birthday = java.sql.Date.valueOf(inputInfo[1]);
+		
+		ProfileBean profile = new ProfileBean(Birthday, inputInfo);
+		
+		HttpSession session = request.getSession();
+		
+		AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
+		
+		ProfileEditDAO dao = new ProfileEditDAO();
+		dao.update(profile, accountInfo);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		
+	}
 }

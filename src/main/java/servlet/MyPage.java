@@ -13,14 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/MyPage")
 public class MyPage extends HttpServlet {
-  private static final long serialVersionUID = 1L; 
-  
-  //顔写真アイコンをおしたとき実行される。
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  
-	  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp");
-	  dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-	  
-  }  
-
+	private static final long serialVersionUID = 1L; 
+	
+	//顔写真アイコンをおしたとき実行される。
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp");
+		dispatcher.forward(request, response);
+	}
 }
