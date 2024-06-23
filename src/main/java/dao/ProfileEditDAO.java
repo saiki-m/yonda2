@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import beans.AccountBean;
 import beans.ProfileBean;
 
 
@@ -15,7 +14,7 @@ import beans.ProfileBean;
 //configDB.javaを継承
 public class ProfileEditDAO extends ConfigDB{
 	
-	public void update(ProfileBean profileInfo, AccountBean account) {
+	public void update(ProfileBean profileInfo, int accountID) {
 		
 		ReadJDBC_Driver();
 		
@@ -39,7 +38,7 @@ public class ProfileEditDAO extends ConfigDB{
 				
 				//アカウントIDのとき
 				if(i == profileInfo.getStrProfileInfo().length) {
-					pStmt.setInt(i+1, account.getAccountID());
+					pStmt.setInt(i+1, accountID);
 					break;
 				}
 				

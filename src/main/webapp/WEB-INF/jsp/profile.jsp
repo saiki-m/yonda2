@@ -20,6 +20,10 @@
     <jsp:include page = "myPageMenu.jsp" />
 	  
     	<h2>プロフィール</h2>
+    	
+    	<c:if test="${not empty Msg}">
+          <p><font color="blue"><c:out value="${Msg}" /></font></p>
+        </c:if>
 
     	<table class="bookshelf-table">
 		    <tr>

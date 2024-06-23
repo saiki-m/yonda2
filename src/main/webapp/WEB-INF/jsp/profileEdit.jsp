@@ -20,6 +20,10 @@
 	  <jsp:include page = "myPageMenu.jsp" />
 	  
     	<h2>プロフィールの編集</h2>
+    	
+    	<c:if test="${not empty errorMsg}">
+          <p><font color="red"><c:out value="${errorMsg}" /></font></p>
+        </c:if>
 
 	    	<form action="Profile" method="post">
 		        <select name="gender" class="input-field" placeholder="性別">

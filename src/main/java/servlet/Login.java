@@ -18,14 +18,15 @@ import jakarta.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	String path = "WEB-INF/jsp/login.jsp";
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String path = "WEB-INF/jsp/login.jsp";
+		
 		// 入力した名前、パスワードを取得
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");

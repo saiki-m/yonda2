@@ -20,43 +20,58 @@ import jakarta.servlet.http.HttpSession;
 public class Profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	String path = "WEB-INF/jsp/profile.jsp";
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String path = "WEB-INF/jsp/profile.jsp";
 		
 		request.setCharacterEncoding("UTF-8");
 		String edit = request.getParameter("edit");
 		
-		if(edit.equals("done")) {
+		if("done".equals(edit)) {
 			//プロフィールページの「編集」ボタンを押したとき
 			path = "WEB-INF/jsp/profileEdit.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		dispatcher.forward(request, response);
 	}  
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String path = "WEB-INF/jsp/profile.jsp";
+		
+		Date Birthday = null; 
+		
 		request.setCharacterEncoding("UTF-8");
 		
-		String[] inputInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
+		String[] strInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
 				"genru", "author", "book_1", "book_2", "book_3"};
 		
-		for(int i = 0; i < inputInfo.length; i++) {
-			inputInfo[i] = request.getParameter(inputInfo[i]);
+		for(int i = 0; i < strInfo.length; i++) {
+			strInfo[i] = request.getParameter(strInfo[i]);
 		}
 		
+		try {			
+			Birthday = java.sql.Date.valueOf(strInfo[1]);
+		}
+		catch(IllegalArgumentException e){
+			
+			request.setAttribute("errorMsg", "生年月日を正しく入力してください。  例）2000-01-23");
+			path = "WEB-INF/jsp/profileEdit.jsp";
+		}
 		
-		Date Birthday = java.sql.Date.valueOf(inputInfo[1]);
-		
-		ProfileBean profile = new ProfileBean(Birthday, inputInfo);
+		ProfileBean profile = new ProfileBean(Birthday, strInfo);
 		
 		HttpSession session = request.getSession();
 		
 		AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
 		
+		int accountID = accountInfo.getAccountID();
+		
 		ProfileEditDAO dao = new ProfileEditDAO();
-		dao.update(profile, accountInfo);
+		dao.update(profile, accountID);
+		
+		request.setAttribute("Msg", "更新しました！");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
