@@ -31,9 +31,9 @@
 					<option value="男">男</option>
 					<option value="女">女</option>
 				</select>
-		        <input type="text" name="birthday" class="input-field" placeholder="生年月日">
+		        <input type="text" name="birthday" value=<c:out value="${profile.birthday}" /> class="input-field" placeholder="生年月日">
 		        
-		        <input type="text" name="profession" class="input-field" placeholder="職業">
+		        <input type="text" name="profession" value=<c:out value="${profile.profession}" /> class="input-field" placeholder="職業">
 		       
 		        <%--「https://yuyauver98.me/template-html-prefectures/」からコピペ --%>
                 <select name="prefectures" class="input-field" placeholder="在住都道府県">

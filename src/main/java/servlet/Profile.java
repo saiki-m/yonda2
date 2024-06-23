@@ -8,6 +8,7 @@ import java.sql.Date;
 import beans.AccountBean;
 import beans.ProfileBean;
 import dao.ProfileEditDAO;
+import dao.ShowProfileDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,6 +31,18 @@ public class Profile extends HttpServlet {
 		if("done".equals(edit)) {
 			//プロフィールページの「編集」ボタンを押したとき
 			path = "WEB-INF/jsp/profileEdit.jsp";
+		}
+		else {
+			HttpSession session = request.getSession();
+			AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
+			
+			int accountID = accountInfo.getAccountID();
+			
+			ShowProfileDAO dao = new ShowProfileDAO();
+			ProfileBean profile = dao.show(accountID);
+			
+			session.setAttribute("profile", profile); 
+			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);

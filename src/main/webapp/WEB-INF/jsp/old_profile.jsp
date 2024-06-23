@@ -18,55 +18,45 @@
   
   <main>
     <jsp:include page = "myPageMenu.jsp" />
-		  
+	  
     	<h2>プロフィール</h2>
     	
     	<c:if test="${not empty Msg}">
-    	      <p><font color="blue"><c:out value="${Msg}" /></font></p>
-		</c:if>
-        
+          <p><font color="blue"><c:out value="${Msg}" /></font></p>
+        </c:if>
+
     	<table class="bookshelf-table">
-    	
-    		
 		    <tr>
 		        <th>生年月日</th>
-		        <td><c:out value="${profile.birthday}" /></td>
+		        <td>1990/1/1</td>
 		    </tr>
 		    <tr>
 		        <th>性別</th>
-		        <td><c:out value="${profile.gender}" /></td>
+		        <td>男</td>
 		    </tr>
 		    <tr>
 		        <th>職業</th>
-		        <td><c:out value="${profile.profession}" /></td>
+		        <td>会社員</td>
 		    </tr>
 		    <tr>
 		        <th>在住都道府県</th>
-		        <td><c:out value="${profile.prefectures}" /></td>
+		        <td>熊本県</td>
 		    </tr>
 		    <tr>
 		        <th>パーソナルタグ</th>
-		        <td><c:out value="${profile.keyword}" /></td>
+		        <td>#文学青年#歴史#SE</td>
 		    </tr>
 		    <tr>
 		        <th>興味のあるジャンル</th>
-		        <td><c:out value="${profile.gender}" /></td>
+		        <td>ミステリー/海外/古典</td>
 		    </tr>
 		    <tr>
 		        <th>好きな作家</th>
-		        <td><c:out value="${profile.author}" /></td>
+		        <td>東野圭吾</td>
 		    </tr>
 		    <tr>
-		        <th>お気に入り1位</th>
-		        <td><c:out value="${profile.book_1}" /></td>
-		    </tr>
-		    <tr>
-		        <th>お気に入り2位</th>
-		        <td><c:out value="${profile.book_2}" /></td>
-		    </tr>
-		    <tr>
-		        <th>お気に入り3位</th>
-		        <td><c:out value="${profile.book_3}" /></td>
+		        <th>お気に入りベスト3</th>
+		        <td>容疑者Xの献身/沈黙/星の王子さま</td>
 		    </tr>
 		</table>
 		
