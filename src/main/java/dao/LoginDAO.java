@@ -14,9 +14,9 @@ import beans.AccountBean;
 //JDBC_URL、DB_USER、DB_PASSがLoginDAOクラスで使えるようになる。
 public class LoginDAO extends ConfigDB{
   
-    public AccountBean findAccount(String name, String password) {
-
-	    ReadJDBC_Driver();
+	public AccountBean findAccount(String name, String password) {
+		
+		ReadJDBC_Driver();
     
 	    // データベースへ接続
 	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
@@ -53,7 +53,8 @@ public class LoginDAO extends ConfigDB{
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    
-	    return null;   //Login.javaの35行目、dao.findAccountID(account)にnullが入る。
+	    return null;
 	    }
-    }
+    
+	}
 }

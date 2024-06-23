@@ -19,44 +19,40 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet("/RePassId")
 public class RePassId extends HttpServlet {
-  private static final long serialVersionUID = 1L; 
-  
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/rePassId.jsp");
-      dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-  }  
+	private static final long serialVersionUID = 1L; 
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-	String forwardPass = "WEB-INF/jsp/rePassId.jsp";
+	String path = "WEB-INF/jsp/rePassId.jsp";
 	
-	// 入力した名前、メールアドレス、秘密の質問を取得
-    request.setCharacterEncoding("UTF-8");
-    String name = request.getParameter("name");
-    String mailAd = request.getParameter("mailAd");
-    String secret_q = request.getParameter("secret_q");
-    
-    
-    //データベースに接続し、該当するアカウントIDを取得。
-    RePassIdDAO dao = new RePassIdDAO();
-    //数をスコープに保存するため、Integerにする。
-	Integer accountID = dao.findAccountID(name, mailAd, secret_q);
-	
-	// アカウントIDが見つからず、取得できなかったとき。
-	// 失敗
-	if (accountID == 0) { 
-		request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
 	}
 	
-	//アカウントIDが見つかったとき
-    //パスワード再設定画面へ
-    else {
-    	request.setAttribute("accountID", accountID);
-    	forwardPass = "WEB-INF/jsp/rePass.jsp";
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 入力した名前、メールアドレス、秘密の質問を取得
+	    request.setCharacterEncoding("UTF-8");
+	    String name = request.getParameter("name");
+	    String mailAd = request.getParameter("mailAd");
+	    String secret_q = request.getParameter("secret_q");
+	    
+	    //該当するアカウントIDを取得。
+	    RePassIdDAO dao = new RePassIdDAO();
+	    //数をスコープに保存するため、Integerにする。
+		Integer accountID = dao.findAccountID(name, mailAd, secret_q);
+		
+		if (accountID == 0) { 
+			// アカウントIDが見つからず、取得できなかったとき。
+			request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");		
+		}
+	    else {
+	    	//アカウントIDが見つかったとき
+	    	//パスワード再設定画面へ
+	    	request.setAttribute("accountID", accountID);
+	    	path = "WEB-INF/jsp/rePass.jsp";
+	    }
 	
-	RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPass);
-	dispatcher.forward(request, response);    
-	
-  }
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);    
+	}
 }
