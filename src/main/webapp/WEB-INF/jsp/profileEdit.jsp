@@ -26,6 +26,7 @@
         </c:if>
 
 	    	<form action="Profile" method="post">
+		        
 		        <select name="gender" class="input-field" placeholder="性別">
 		        
 		        <c:choose>
@@ -35,21 +36,29 @@
 		        	<c:otherwise>
 		        		<option value="無回答">無回答</option>
 		        	</c:otherwise>
-		        </c:choose>
-		        
-		        	
-		        
+		        </c:choose>   
 					
 					<option value="男">男</option>
 					<option value="女">女</option>
 				</select>
+				
 		        <input type="text" name="birthday" value= "<c:out value="${profile.birthday}" />" class="input-field" placeholder="生年月日">
 		        
 		        <input type="text" name="profession" value= "<c:out value="${profile.profession}" />" class="input-field" placeholder="職業">
 		       
 		        <%--「https://yuyauver98.me/template-html-prefectures/」からコピペ --%>
                 <select name="prefectures" class="input-field" value= placeholder="在住都道府県">
-                  <option value="<c:out value="${profile.prefectures}" />" selected>都道府県を選択</option>
+                  
+                    <c:choose>
+		        		<c:when test="${not empty profile.prefectures}">
+		        			<option value = "<c:out value="${profile.prefectures}" />" > <c:out value="${profile.prefectures}" /> </option>
+		        		</c:when>
+		        		<c:otherwise>
+		        			<option value="都道府県を選択">都道府県を選択</option>
+		        		</c:otherwise>
+		            </c:choose>
+		          
+                  
 				  <option value="北海道">北海道</option>
 				  <option value="青森県">青森県</option>
 				  <option value="岩手県">岩手県</option>
