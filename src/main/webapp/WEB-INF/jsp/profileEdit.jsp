@@ -27,17 +27,29 @@
 
 	    	<form action="Profile" method="post">
 		        <select name="gender" class="input-field" placeholder="性別">
-					<option value="無回答">無回答</option>
+		        
+		        <c:choose>
+		        	<c:when test="${not empty profile.gender}">
+		        		<option value = "<c:out value="${profile.gender}" />" > <c:out value="${profile.gender}" /> </option>
+		        	</c:when>
+		        	<c:otherwise>
+		        		<option value="無回答">無回答</option>
+		        	</c:otherwise>
+		        </c:choose>
+		        
+		        	
+		        
+					
 					<option value="男">男</option>
 					<option value="女">女</option>
 				</select>
-		        <input type="text" name="birthday" value=<c:out value="${profile.birthday}" /> class="input-field" placeholder="生年月日">
+		        <input type="text" name="birthday" value= "<c:out value="${profile.birthday}" />" class="input-field" placeholder="生年月日">
 		        
-		        <input type="text" name="profession" value=<c:out value="${profile.profession}" /> class="input-field" placeholder="職業">
+		        <input type="text" name="profession" value= "<c:out value="${profile.profession}" />" class="input-field" placeholder="職業">
 		       
 		        <%--「https://yuyauver98.me/template-html-prefectures/」からコピペ --%>
-                <select name="prefectures" class="input-field" placeholder="在住都道府県">
-                  <option value="" selected>都道府県を選択</option>
+                <select name="prefectures" class="input-field" value= placeholder="在住都道府県">
+                  <option value="<c:out value="${profile.prefectures}" />" selected>都道府県を選択</option>
 				  <option value="北海道">北海道</option>
 				  <option value="青森県">青森県</option>
 				  <option value="岩手県">岩手県</option>
@@ -87,12 +99,12 @@
 				  <option value="沖縄県">沖縄県</option>
 				</select>
 				
-                <input type="text" name="keyword" class="input-field" placeholder="パーソナルタグ"><br>
-                <input type="text" name="genru" class="input-field" placeholder="好きなジャンル"><br>
-                <input type="text" name="author" class="input-field" placeholder="好きな作家"><br>
-                <input type="text" name="book_1" class="input-field" placeholder="お気に入りの本1位"><br>
-                <input type="text" name="book_2" class="input-field" placeholder="お気に入りの本2位"><br>
-                <input type="text" name="book_3" class="input-field" placeholder="お気に入りの本3位"><br>
+                <input type="text" name="keyword"  value = "<c:out value="${profile.keyword}" />" class="input-field"  placeholder="パーソナルタグ"><br>
+                <input type="text" name="genru"  value = "<c:out value="${profile.genru}" />" class="input-field" placeholder="好きなジャンル"><br>
+                <input type="text" name="author"  value = "<c:out value="${profile.author}" />" class="input-field" placeholder="好きな作家"><br>
+                <input type="text" name="book_1"  value = "<c:out value="${profile.book_1}" />" class="input-field" placeholder="お気に入りの本1位"><br>
+                <input type="text" name="book_2"  value = "<c:out value="${profile.book_2}" />" class="input-field" placeholder="お気に入りの本2位"><br>
+                <input type="text" name="book_3"  value = "<c:out value="${profile.book_3}" />" class="input-field" placeholder="お気に入りの本3位"><br>
                 
 	        <button type="submit" class="cert-btn">保存</button>
 	      	</form>

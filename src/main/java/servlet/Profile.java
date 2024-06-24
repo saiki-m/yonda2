@@ -78,8 +78,21 @@ public class Profile extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
+		ProfileBean beforeProfile = (ProfileBean)session.getAttribute("profile");
 		
 		int accountID = accountInfo.getAccountID();
+		
+		beforeProfile.setGender(strInfo[0]);
+		beforeProfile.setBirthday(Birthday);
+		beforeProfile.setProfession(strInfo[2]);
+		beforeProfile.setPrefectures(strInfo[3]);
+		beforeProfile.setKeyword(strInfo[4]);
+		beforeProfile.setGenru(strInfo[5]);
+		beforeProfile.setAuthor(strInfo[6]);
+		beforeProfile.setBook_1(strInfo[7]);
+		beforeProfile.setBook_2(strInfo[8]);
+		beforeProfile.setBook_3(strInfo[9]);
+		
 		
 		ProfileEditDAO dao = new ProfileEditDAO();
 		dao.update(profile, accountID);

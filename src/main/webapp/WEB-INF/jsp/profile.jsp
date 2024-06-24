@@ -50,7 +50,7 @@
 		    </tr>
 		    <tr>
 		        <th>興味のあるジャンル</th>
-		        <td><c:out value="${profile.gender}" /></td>
+		        <td><c:out value="${profile.genru}" /></td>
 		    </tr>
 		    <tr>
 		        <th>好きな作家</th>
