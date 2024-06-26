@@ -20,30 +20,31 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/DeleteReadingRec")
 public class DeleteReadingRec extends HttpServlet {
-  private static final long serialVersionUID = 1L; 
-  	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private static final long serialVersionUID = 1L; 
 
-  		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/readingRecAdd.jsp");
-	    dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-	  
-  	}
-	  
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  request.setCharacterEncoding("UTF-8");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/readingRecAdd.jsp");
+		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		String loopIndex = request.getParameter("LoopIndex");
 		
 		//int型に変換する  https://www.javadrive.jp/start/string/index12.html#section1   
 		int index = Integer.parseInt(loopIndex);
 		
-	    
-	    HttpSession session = request.getSession();
-	    @SuppressWarnings("unchecked")
+		
+		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
 		List<ReadingRecBean> readingRecList = (List<ReadingRecBean>)session.getAttribute("readingRecList");
-	    
-	    int readingRecID = readingRecList.get(index).getReadingRecID();
-	    
-	    ReadingRecDeleteDAO dao = new ReadingRecDeleteDAO();
-	    
+		
+		int readingRecID = readingRecList.get(index).getReadingRecID();
+		
+		ReadingRecDeleteDAO dao = new ReadingRecDeleteDAO();
+		
 		if(dao.delete(readingRecID)) { request.setAttribute("Msg", "削除しました!"); }
 		else { request.setAttribute("errorMsg", "削除できませんでした"); }
 		
@@ -51,7 +52,7 @@ public class DeleteReadingRec extends HttpServlet {
 		readingRecList.remove(index);
 			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
-	    dispatcher.forward(request, response); 
-	
-  }
+		dispatcher.forward(request, response); 
+		
+	}
 }
