@@ -12,7 +12,7 @@ import beans.ProfileBean;
 //アカウント情報をアカウントテーブルに新規登録するDAO
 //サンプルデータがアカウントテーブルに登録されていなかったらエラーになる。
 //configDB.javaを継承
-public class ProfileEditDAO extends ConfigDB{
+public class EditProfileDAO extends ConfigDB{
 	
 	public void update(ProfileBean profileInfo, int accountID) {
 		

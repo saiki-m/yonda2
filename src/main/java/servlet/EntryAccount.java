@@ -2,7 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
-import dao.AccountEntryDAO;
+import dao.EntryAccountDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  *   アカウント新規登録
  */
-@WebServlet("/AccountEntry")
-public class AccountEntry extends HttpServlet {
+@WebServlet("/EntryAccount")
+public class EntryAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class AccountEntry extends HttpServlet {
 			a[i] = request.getParameter(a[i]);
 		}    
 		
-		AccountEntryDAO dao = new AccountEntryDAO();
+		EntryAccountDAO dao = new EntryAccountDAO();
 		dao.create(a); 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp");

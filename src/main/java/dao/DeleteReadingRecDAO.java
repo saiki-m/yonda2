@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ReadingRecDeleteDAO extends ConfigDB{
+public class DeleteReadingRecDAO extends ConfigDB{
   
 	public Boolean delete(int readingRecID) {
 		 

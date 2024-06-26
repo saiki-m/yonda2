@@ -10,7 +10,7 @@ import java.util.List;
 
 import beans.AccountBean;
 import beans.ReadingRecBean;
-import dao.ReadingRecAddDAO;
+import dao.AddReadingRecDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/ReadingRecAdd")
-public class ReadingRecAdd extends HttpServlet {
+@WebServlet("/AddReadingRec")
+public class AddReadingRec extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -54,7 +54,7 @@ public class ReadingRecAdd extends HttpServlet {
 		AccountBean accountInfo = (AccountBean) session.getAttribute("accountInfo");
 		
 		//データベースyondaの読書状況に読書記録追加
-		ReadingRecAddDAO dao = new ReadingRecAddDAO();
+		AddReadingRecDAO dao = new AddReadingRecDAO();
 		boolean Rec = dao.create(readingRec, accountInfo.getAccountID());
 		
 		//追加できたとき

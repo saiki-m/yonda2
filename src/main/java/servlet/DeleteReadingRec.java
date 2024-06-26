@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import beans.ReadingRecBean;
-import dao.ReadingRecDeleteDAO;
+import dao.DeleteReadingRecDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,7 +43,7 @@ public class DeleteReadingRec extends HttpServlet {
 		
 		int readingRecID = readingRecList.get(index).getReadingRecID();
 		
-		ReadingRecDeleteDAO dao = new ReadingRecDeleteDAO();
+		DeleteReadingRecDAO dao = new DeleteReadingRecDAO();
 		
 		if(dao.delete(readingRecID)) { request.setAttribute("Msg", "削除しました!"); }
 		else { request.setAttribute("errorMsg", "削除できませんでした"); }

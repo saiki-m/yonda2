@@ -7,7 +7,7 @@ import java.sql.Date;
 
 import beans.AccountBean;
 import beans.ProfileBean;
-import dao.ProfileEditDAO;
+import dao.EditProfileDAO;
 import dao.ShowProfileDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/Profile")
-public class Profile extends HttpServlet {
+@WebServlet("/EditProfile")
+public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -94,7 +94,7 @@ public class Profile extends HttpServlet {
 		beforeProfile.setBook_3(strInfo[9]);
 		
 		
-		ProfileEditDAO dao = new ProfileEditDAO();
+		EditProfileDAO dao = new EditProfileDAO();
 		dao.update(profile, accountID);
 		
 		request.setAttribute("Msg", "更新しました！");

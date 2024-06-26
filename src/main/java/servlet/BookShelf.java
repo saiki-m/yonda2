@@ -13,17 +13,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/BookShelf")
 public class BookShelf extends HttpServlet {
-  private static final long serialVersionUID = 1L; 
-  
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
-	    dispatcher.forward(request, response);   
-	  
-  }
-
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-    
+	private static final long serialVersionUID = 1L; 
 	
-  }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
+		dispatcher.forward(request, response);   
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+	}
 }

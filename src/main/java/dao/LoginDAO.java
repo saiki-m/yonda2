@@ -47,13 +47,13 @@ public class LoginDAO extends ConfigDB{
 		        account = new AccountBean(ID, accountName, pass, mailAd, secret_q);
 	        }
 
-	    return account;   //accountIDインスタンスにアカウントIDが入っている状態。
+	        return account;   //accountIDインスタンスにアカウントIDが入っている状態。
 	    
 	    }  
 	    catch (SQLException e) {
-	      e.printStackTrace();
+	    	e.printStackTrace();
 	    
-	    return null;
+	    	return null;
 	    }
     
 	}

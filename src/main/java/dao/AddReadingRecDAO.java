@@ -12,7 +12,7 @@ import java.util.List;
 
 import beans.ReadingRecBean;
 
-public class ReadingRecAddDAO extends ConfigDB{
+public class AddReadingRecDAO extends ConfigDB{
   
 	//本棚に本を追加
 	public boolean create(ReadingRecBean rec, int accountID) {
