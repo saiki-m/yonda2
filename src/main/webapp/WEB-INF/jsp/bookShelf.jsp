@@ -74,7 +74,7 @@
             </c:forEach>
 		</table>
 		
-	<a href="ReadingRecAdd" class="btn">本を追加</a><br>
+	<a href="AddReadingRec" class="btn">本を追加</a><br>
 	<a href="LogOut" class="logout-btn">ログアウト</a>	
 
 </main>

@@ -20,7 +20,7 @@
         <c:if test="${not empty errorMsg}">
           <p><font color="red"><c:out value="${errorMsg}" /></font></p>
         </c:if>
-      	<form action="ReadingRecAdd" method="post">
+      	<form action="AddReadingRec" method="post">
 	        <input type="text" name="title" class="input-field" placeholder="タイトル" required>
 	        <input type="text" name="author" class="input-field" placeholder="作者" required>
 	        <select name="readStatus" class="input-field" placeholder="読書状況">

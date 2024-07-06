@@ -10,5 +10,5 @@
 	  	<h3><c:out value="${accountInfo.name}" />さん</h3>
     	
     	<a href="BookShelf" class="btn">本棚</a>
-    	<a href="Profile" class="btn">プロフィール</a>
+    	<a href="EditProfile" class="btn">プロフィール</a>
 	</div>

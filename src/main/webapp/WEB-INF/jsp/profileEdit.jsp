@@ -25,7 +25,7 @@
           <p><font color="red"><c:out value="${errorMsg}" /></font></p>
         </c:if>
 
-	    	<form action="Profile" method="post">
+	    	<form action="EditProfile" method="post">
 		        
 		        <select name="gender" class="input-field" placeholder="性別">
 		        
