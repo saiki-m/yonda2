@@ -1,8 +1,3 @@
-//「スッキリわかるサーブレット＆JSP入門」P298のコード10-14、55行目～69行目参考
-//P298のコード10-13
-
-//本棚に読書記録を追加する
-
 package servlet;
 
 import java.io.IOException;
@@ -18,6 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * 
+ * 本棚から読書記録を削除する
+ * 
+ * //「スッキリわかるサーブレット＆JSP入門」P298のコード10-14、55行目～69行目参考
+ * //P298のコード10-13
+ */
 @WebServlet("/DeleteReadingRec")
 public class DeleteReadingRec extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
@@ -31,11 +33,8 @@ public class DeleteReadingRec extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		String loopIndex = request.getParameter("LoopIndex");
-		
-		//int型に変換する  https://www.javadrive.jp/start/string/index12.html#section1   
-		int index = Integer.parseInt(loopIndex);
-		
+
+		int index = Integer.parseInt( request.getParameter("LoopIndex") );
 		
 		HttpSession session = request.getSession();
 		@SuppressWarnings("unchecked")
@@ -43,16 +42,16 @@ public class DeleteReadingRec extends HttpServlet {
 		
 		int readingRecID = readingRecList.get(index).getReadingRecID();
 		
-		DeleteReadingRecDAO dao = new DeleteReadingRecDAO();
+		//DAOクラスのdeleteメソッドで削除
+		new DeleteReadingRecDAO().delete(readingRecID);
 		
-		if(dao.delete(readingRecID)) { request.setAttribute("Msg", "削除しました!"); }
-		else { request.setAttribute("errorMsg", "削除できませんでした"); }
-		
+		request.setAttribute("Msg", "削除しました!"); 
+			
 		//https://magazine.techacademy.jp/magazine/18607#sec3
+		//スコープ内の読書記録を削除
 		readingRecList.remove(index);
 			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
 		dispatcher.forward(request, response); 
-		
 	}
 }

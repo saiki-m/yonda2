@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DeleteReadingRecDAO extends ConfigDB{
   
-	public Boolean delete(int readingRecID) {
+	public void delete(int readingRecID) {
 		 
 		//親クラスConfigDBのメソッドを利用
 		ReadJDBC_Driver();
@@ -30,10 +30,6 @@ public class DeleteReadingRecDAO extends ConfigDB{
 	      //tryの中でエラーが出たら、catchのみ実行する
 	    catch (SQLException e) {
 	      e.printStackTrace();
-	      return false;
 	    }           
-	    
-	    return true;                      
-	  }
-	    
+	}    
 }
