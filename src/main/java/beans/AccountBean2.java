@@ -33,11 +33,9 @@ public class AccountBean2 implements Serializable{
 	
 	//ログイン用
 	public AccountBean2(int accountID, String name, String password, String mailAd, String secret_q) {
+		
+		this(name, password, mailAd, secret_q);
 	    this.accountID = accountID;
-	    this.name = name;
-	    this.password = password;
-	    this.mailAd = mailAd;
-	    this.secret_q = secret_q;
 	}
 	
 	

@@ -32,23 +32,18 @@ public class AddReadingRec extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int count2 = 0;
-		int point2 = 0;
 		
 		// リクエストパラメータを取得
 		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");
 		String readStatus = request.getParameter("readStatus");
-		String count = request.getParameter("count");
-		String point = request.getParameter("point");
+		int count = Integer.parseInt( request.getParameter("count") );
+		int point = Integer.parseInt( request.getParameter("point") );
 		String impression = request.getParameter("impression");
 		
-		count2 = Integer.parseInt(count);
-		point2 = Integer.parseInt(point);
-		
 		//入力情報をインスタンスに保存
-		ReadingRecBean readingRec = new ReadingRecBean(title, author, readStatus, count2, point2, impression);
+		ReadingRecBean readingRec = new ReadingRecBean(title, author, readStatus, count, point, impression);
 		
 		HttpSession session = request.getSession();
 		AccountBean accountInfo = (AccountBean) session.getAttribute("accountInfo");

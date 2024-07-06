@@ -22,13 +22,8 @@ public class ReadingRecBean implements Serializable{
 	//ログイン時に本棚の内容を取得
 	public ReadingRecBean(int readingRecID, String title, String author, String readStatus, int count, int point, String impression) {
 		
+		this(title, author, readStatus, count, point, impression);
 		this.readingRecID = readingRecID;
-		this.title = title;
-		this.author = author;
-		this.readStatus = readStatus;
-		this.count = count;
-		this.point = point;
-		this.impression = impression;
 	}
 	
 	//本棚に本を新規登録
