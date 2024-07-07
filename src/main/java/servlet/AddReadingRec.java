@@ -35,7 +35,6 @@ public class AddReadingRec extends HttpServlet {
 		
 		String path = "WEB-INF/jsp/readingRecAdd.jsp";
 		
-		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");
 		String readStatus = request.getParameter("readStatus");

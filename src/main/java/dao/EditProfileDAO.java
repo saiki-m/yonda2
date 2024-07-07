@@ -7,19 +7,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import beans.ProfileBean;
+import model.ConfigDB;
 
 
 //アカウント情報をアカウントテーブルに新規登録するDAO
 //サンプルデータがアカウントテーブルに登録されていなかったらエラーになる。
 //configDB.javaを継承
-public class EditProfileDAO extends ConfigDB{
+public class EditProfileDAO{
 	
 	public void update(ProfileBean profileInfo, int accountID) {
 		
-		ReadJDBC_Driver();
+		ConfigDB.ReadJDBC_Driver();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 			
 			// SELECT文を準備
 			String sql = "UPDATE プロフィール SET 性別 = ?, 生年月日 = ?, 職業 = ?, 在住都道府県 = ?, "

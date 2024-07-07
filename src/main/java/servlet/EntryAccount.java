@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 
 import dao.EntryAccountDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,13 +17,11 @@ public class EntryAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountEntry.jsp");
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		//フォワードはjspフォルダ内に置く
+		request.getRequestDispatcher("WEB-INF/jsp/accountEntry.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
 		
 		String[] a = {"name", "password", "mailAd", "secret_q"};
 		
@@ -34,7 +31,6 @@ public class EntryAccount extends HttpServlet {
 		
 		new EntryAccountDAO().create(a);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp").forward(request, response);
 	}
 }

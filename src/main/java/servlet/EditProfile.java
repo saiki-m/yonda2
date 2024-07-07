@@ -25,7 +25,6 @@ public class EditProfile extends HttpServlet {
 	
 		String path = "WEB-INF/jsp/profile.jsp";
 		
-		request.setCharacterEncoding("UTF-8");
 		String edit = request.getParameter("edit");
 		
 		if("done".equals(edit)) {
@@ -41,7 +40,6 @@ public class EditProfile extends HttpServlet {
 			ProfileBean profile = new ShowProfileDAO().show(accountID);
 			
 			session.setAttribute("profile", profile); 
-			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
@@ -53,8 +51,6 @@ public class EditProfile extends HttpServlet {
 		String path = "WEB-INF/jsp/profile.jsp";
 		
 		Date Birthday = null; 
-		
-		request.setCharacterEncoding("UTF-8");
 		
 		String[] strInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
 				"genru", "author", "book_1", "book_2", "book_3"};
@@ -74,10 +70,8 @@ public class EditProfile extends HttpServlet {
 		
 		ProfileBean profile = new ProfileBean(Birthday, strInfo);
 		
-		HttpSession session = request.getSession();
-		
-		AccountBean accountInfo = (AccountBean)session.getAttribute("accountInfo");
-		ProfileBean beforeProfile = (ProfileBean)session.getAttribute("profile");
+		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
+		ProfileBean beforeProfile = (ProfileBean)request.getSession().getAttribute("profile");
 		
 		int accountID = accountInfo.getAccountID();
 		

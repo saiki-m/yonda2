@@ -20,8 +20,6 @@ public class RePass extends HttpServlet {
 		
 		String path = "WEB-INF/jsp/rePass.jsp";
 		
-		request.setCharacterEncoding("UTF-8");
-		
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
 		int accountID= Integer.parseInt(request.getParameter("accountID"));

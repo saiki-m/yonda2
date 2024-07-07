@@ -9,19 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import beans.ProfileBean;
+import model.ConfigDB;
 
 
 //アカウント情報をアカウントテーブルに新規登録するDAO
 //サンプルデータがアカウントテーブルに登録されていなかったらエラーになる。
 //configDB.javaを継承
-public class ShowProfileDAO extends ConfigDB{
+public class ShowProfileDAO{
 	
 	public ProfileBean show(int accountID) {
 		
-		ReadJDBC_Driver();
+		ConfigDB.ReadJDBC_Driver();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 			
 			ProfileBean profile = null;
 			

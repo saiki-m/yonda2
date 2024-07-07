@@ -9,17 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import beans.AccountBean;
+import model.ConfigDB;
 
 //ConfigDB.javaのConfigDBクラスを継承。
 //JDBC_URL、DB_USER、DB_PASSがLoginDAOクラスで使えるようになる。
-public class LoginDAO extends ConfigDB{
+public class LoginDAO{
   
 	public AccountBean findAccount(String name, String password) {
 		
-		ReadJDBC_Driver();
+		ConfigDB.ReadJDBC_Driver();
     
 	    // データベースへ接続
-	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	    try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
     	
 	    	AccountBean account = null;
 	    	

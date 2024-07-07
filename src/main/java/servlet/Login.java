@@ -31,7 +31,6 @@ public class Login extends HttpServlet {
 		String path = "WEB-INF/jsp/login.jsp";
 		
 		// 入力した名前、パスワードを取得
-		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		

@@ -21,7 +21,7 @@
           <c:if test="${not empty errorMsg}">
             <p><font color="red"><c:out value="${errorMsg}" /></font></p>
           </c:if>
-      	<form action="AccountEntry" method="post">
+      	<form action="EntryAccount" method="post">
 	        <input type="text" name="name" class="input-field" placeholder="ユーザ名" required>
 	        <input type="password" name="password" class="input-field" placeholder="パスワード" required>
 	        <input type="email" name="mailAd" class="input-field" placeholder="メールアドレス" required>

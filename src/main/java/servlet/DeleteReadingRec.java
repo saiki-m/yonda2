@@ -26,12 +26,10 @@ public class DeleteReadingRec extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/readingRecAdd.jsp");
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		dispatcher.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
 		
 		int index = Integer.parseInt( request.getParameter("LoopIndex") );
 		

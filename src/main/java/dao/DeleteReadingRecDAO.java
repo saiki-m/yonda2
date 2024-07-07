@@ -7,15 +7,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DeleteReadingRecDAO extends ConfigDB{
+import model.ConfigDB;
+
+public class DeleteReadingRecDAO{
   
 	public void delete(int readingRecID) {
 		 
 		//親クラスConfigDBのメソッドを利用
-		ReadJDBC_Driver();
+		ConfigDB.ReadJDBC_Driver();
 	    
 	    // データベースへ接続
-	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	    try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 	    	
 	      String sql = "DELETE FROM 読書状況 WHERE 読書状況ID=? ";
 	        

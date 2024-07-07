@@ -30,7 +30,6 @@ public class RePassId extends HttpServlet {
 		String path = "WEB-INF/jsp/rePassId.jsp";
 		
 		// 入力した名前、メールアドレス、秘密の質問を取得
-	    request.setCharacterEncoding("UTF-8");
 	    String name = request.getParameter("name");
 	    String mailAd = request.getParameter("mailAd");
 	    String secret_q = request.getParameter("secret_q");

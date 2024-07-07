@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.ReadingRecBean;
+import model.ConfigDB;
 
-public class AddReadingRecDAO extends ConfigDB{
-  
+public class AddReadingRecDAO{
+	
+	public AddReadingRecDAO() {
+		ConfigDB.ReadJDBC_Driver();
+	}
+
 	//本棚に本を追加
 	public boolean create(ReadingRecBean rec, int accountID) {
 		
-		//親クラスConfigDBのメソッドを利用
-		ReadJDBC_Driver();
-		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 			
 			// SELECT文を準備
 			String sql = "INSERT INTO 読書状況(アカウントID, タイトル, 作者, 読書状況, 回数, 点数, 感想)"
@@ -53,12 +55,8 @@ public class AddReadingRecDAO extends ConfigDB{
 		
 		List<ReadingRecBean> readingRecList = new ArrayList<>();
 		
-		//JDBCドライバを読み込む
-		//親クラスConfigDBのメソッドを利用
-		ReadJDBC_Driver();
-		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 			// SELECT文を準備
 			String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況, 回数, 点数, 感想 FROM 読書状況 WHERE アカウントID = ?";
 			

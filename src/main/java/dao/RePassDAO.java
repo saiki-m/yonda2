@@ -6,14 +6,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RePassDAO extends ConfigDB{
+import model.ConfigDB;
+
+public class RePassDAO{
 	
 	public void rePass(String password, int accountID) {
 		
-		ReadJDBC_Driver();
+		ConfigDB.ReadJDBC_Driver();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
 			
 			// SELECT文を準備
 			String sql = "UPDATE アカウント SET パスワード=? WHERE アカウントID=? ";

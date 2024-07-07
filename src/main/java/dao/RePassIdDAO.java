@@ -8,13 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RePassIdDAO extends ConfigDB{
+import model.ConfigDB;
+
+public class RePassIdDAO{
 	
     public Integer findAccountID(String name, String mailAd, String secret_q) {
 	  
-		ReadJDBC_Driver();
+    	ConfigDB.ReadJDBC_Driver();
 	
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+        try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
     	
         	int accountID = 0;
 
