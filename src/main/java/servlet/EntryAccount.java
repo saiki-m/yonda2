@@ -32,8 +32,7 @@ public class EntryAccount extends HttpServlet {
 			a[i] = request.getParameter(a[i]);
 		}    
 		
-		EntryAccountDAO dao = new EntryAccountDAO();
-		dao.create(a); 
+		new EntryAccountDAO().create(a);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp");
 		dispatcher.forward(request, response);

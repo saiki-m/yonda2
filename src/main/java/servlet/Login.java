@@ -12,17 +12,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		dispatcher.forward(request, response);
 	}
 	
+	/**
+	 *	ログイン画面からマイページに移動させる
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String path = "WEB-INF/jsp/login.jsp";
@@ -32,14 +35,12 @@ public class Login extends HttpServlet {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		
-		//データベースに接続。アカウントIDを見つけて取得する。
-		LoginDAO dao = new LoginDAO();
-		AccountBean accountInfo = dao.findAccount(name, password);
+		//データベースからアカウントIDを見つけて取得する。
+		AccountBean accountInfo = new LoginDAO().findAccount(name, password);
 		
 		if (accountInfo != null) {
 			//ログイン成功
-			HttpSession session = request.getSession();
-			session.setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
+			request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
 			
 			//本棚に表示する読書記録の一覧を取得。
 //    		ReadingRecAddDAO dao2 = new ReadingRecAddDAO();
@@ -56,7 +57,6 @@ public class Login extends HttpServlet {
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
-		
-  }
+		dispatcher.forward(request, response);
+	}
 }

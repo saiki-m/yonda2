@@ -38,8 +38,7 @@ public class EditProfile extends HttpServlet {
 			
 			int accountID = accountInfo.getAccountID();
 			
-			ShowProfileDAO dao = new ShowProfileDAO();
-			ProfileBean profile = dao.show(accountID);
+			ProfileBean profile = new ShowProfileDAO().show(accountID);
 			
 			session.setAttribute("profile", profile); 
 			
@@ -94,8 +93,7 @@ public class EditProfile extends HttpServlet {
 		beforeProfile.setBook_3(strInfo[9]);
 		
 		
-		EditProfileDAO dao = new EditProfileDAO();
-		dao.update(profile, accountID);
+		new EditProfileDAO().update(profile, accountID);
 		
 		request.setAttribute("Msg", "更新しました！");
 		

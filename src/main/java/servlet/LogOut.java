@@ -4,13 +4,11 @@ package servlet;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/LogOut")
 public class LogOut extends HttpServlet {
@@ -19,10 +17,8 @@ public class LogOut extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//セッションスコープとして保存したインスタンスをすべて破棄
-		HttpSession session = request.getSession();
-		session.invalidate();
+		request.getSession().invalidate();
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/logout.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/logout.jsp").forward(request, response);
 	}
 }

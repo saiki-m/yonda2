@@ -7,7 +7,6 @@ package servlet;
 import java.io.IOException;
 
 import dao.RePassIdDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,15 +19,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/RePassId")
 public class RePassId extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
-
-	String path = "WEB-INF/jsp/rePassId.jsp";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
+		
+		request.getRequestDispatcher("WEB-INF/jsp/rePassId.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String path = "WEB-INF/jsp/rePassId.jsp";
 		
 		// 入力した名前、メールアドレス、秘密の質問を取得
 	    request.setCharacterEncoding("UTF-8");
@@ -36,10 +35,8 @@ public class RePassId extends HttpServlet {
 	    String mailAd = request.getParameter("mailAd");
 	    String secret_q = request.getParameter("secret_q");
 	    
-	    //該当するアカウントIDを取得。
-	    RePassIdDAO dao = new RePassIdDAO();
 	    //数をスコープに保存するため、Integerにする。
-		Integer accountID = dao.findAccountID(name, mailAd, secret_q);
+		Integer accountID = new RePassIdDAO().findAccountID(name, mailAd, secret_q);
 		
 		if (accountID == 0) { 
 			// アカウントIDが見つからず、取得できなかったとき。
@@ -52,7 +49,6 @@ public class RePassId extends HttpServlet {
 	    	path = "WEB-INF/jsp/rePass.jsp";
 	    }
 	
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);    
+		request.getRequestDispatcher(path).forward(request, response);    
 	}
 }

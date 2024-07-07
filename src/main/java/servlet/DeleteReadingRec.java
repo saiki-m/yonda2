@@ -11,7 +11,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  * 
@@ -33,12 +32,11 @@ public class DeleteReadingRec extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-
+		
 		int index = Integer.parseInt( request.getParameter("LoopIndex") );
 		
-		HttpSession session = request.getSession();
 		@SuppressWarnings("unchecked")
-		List<ReadingRecBean> readingRecList = (List<ReadingRecBean>)session.getAttribute("readingRecList");
+		List<ReadingRecBean> readingRecList = (List<ReadingRecBean>)request.getSession().getAttribute("readingRecList");
 		
 		int readingRecID = readingRecList.get(index).getReadingRecID();
 		
@@ -46,12 +44,12 @@ public class DeleteReadingRec extends HttpServlet {
 		new DeleteReadingRecDAO().delete(readingRecID);
 		
 		request.setAttribute("Msg", "削除しました!"); 
-			
+		
 		//https://magazine.techacademy.jp/magazine/18607#sec3
 		//スコープ内の読書記録を削除
 		readingRecList.remove(index);
-			
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
-		dispatcher.forward(request, response); 
+		dispatcher.forward(request, response);
 	}
 }
