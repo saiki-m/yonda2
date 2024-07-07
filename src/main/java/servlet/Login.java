@@ -41,14 +41,6 @@ public class Login extends HttpServlet {
 			//ログイン成功
 			request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
 			
-			//本棚に表示する読書記録の一覧を取得。
-//    		ReadingRecAddDAO dao2 = new ReadingRecAddDAO();
-//    		List<ReadingRecBean> readingRecList = dao2.findAll(accountInfo.getAccountID());
-//    	
-//    		//「bookShelf.jsp」、「ReadingRecAdd.java」で使うため、セッションスコープに保存。
-//    		session.setAttribute("readingRecList", readingRecList);
-//    	
-			
 			path = "WEB-INF/jsp/myPage.jsp";
 		}
 		else {

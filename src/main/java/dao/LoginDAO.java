@@ -11,10 +11,20 @@ import java.sql.SQLException;
 import beans.AccountBean;
 import model.ConfigDB;
 
-//ConfigDB.javaのConfigDBクラスを継承。
-//JDBC_URL、DB_USER、DB_PASSがLoginDAOクラスで使えるようになる。
+/**
+ * 	ログイン画面からマイページに移動するとき起動するクラス。
+ */
 public class LoginDAO{
   
+	/**
+	 *	データベースから
+	 * 	アカウント名とパスワードの組み合わせで一致するデータを探す。
+	 * 
+	 * @param name			アカウント名
+	 * @param password		パスワード名
+	 * @return	アカウント情報（アカウントID、アカウント名、パスワード名、
+	 * 					メールアドレス、秘密の質問）を格納しているインスタンス
+	 */
 	public AccountBean findAccount(String name, String password) {
 		
 		ConfigDB.ReadJDBC_Driver();
@@ -48,7 +58,7 @@ public class LoginDAO{
 		        account = new AccountBean(ID, accountName, pass, mailAd, secret_q);
 	        }
 
-	        return account;   //accountIDインスタンスにアカウントIDが入っている状態。
+	        return account;
 	    
 	    }  
 	    catch (SQLException e) {

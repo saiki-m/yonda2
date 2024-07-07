@@ -13,7 +13,7 @@ import model.ConfigDB;
 public class EntryAccountDAO{
 	
 	public EntryAccountDAO(){
-		//JDBCドライバーを読み込む。newでインスタンス生成されたらこのメソッドが実行される。
+		//JDBCドライバーを読み込む。newでインスタンス生成されたらこのメソッド実行される。
 		ConfigDB.ReadJDBC_Driver();
 	}
 	

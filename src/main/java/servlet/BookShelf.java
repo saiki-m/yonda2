@@ -3,7 +3,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
+import beans.AccountBean;
+import beans.ReadingRecBean;
+import dao.AddReadingRecDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +21,14 @@ public class BookShelf extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
 	
+		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
+		
+		List<ReadingRecBean> readingRecList = new AddReadingRecDAO().findAll(accountInfo.getAccountID());
+	
+		//セッションスコープに保存。
+		request.getSession().setAttribute("readingRecList", readingRecList);
+	
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
 		dispatcher.forward(request, response);   
 	}
