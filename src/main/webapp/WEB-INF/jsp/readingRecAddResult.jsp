@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="./css/style.css">
-<title>yonda！</title>
+  <jsp:include page = "head.jsp" /> 
 </head>
 <body>
   <header>

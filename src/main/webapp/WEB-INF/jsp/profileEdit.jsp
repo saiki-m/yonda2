@@ -7,9 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="./css/style.css">
-<title>プロフィールの編集</title>
+  <jsp:include page = "head.jsp" />
 </head>
 
 <body>
