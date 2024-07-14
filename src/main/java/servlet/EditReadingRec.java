@@ -28,8 +28,11 @@ public class EditReadingRec extends HttpServlet {
 			dispatcher.forward(request, response);   //フォワードはjspフォルダ内に置く
 			
 		}
-	  
+	   
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			int count = 0;
+			int point = 0;
 			
 			Integer index = Integer.parseInt( request.getParameter("LoopIndex") );
 			String readingRecID_BySave = request.getParameter("Save");
@@ -47,6 +50,7 @@ public class EditReadingRec extends HttpServlet {
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/EditReadingRec.jsp");
 				dispatcher.forward(request, response);
+				
 			}else {
 				//「保存する」ボタンを押したとき実行。
 				int readingRecID = Integer.parseInt(readingRecID_BySave);
@@ -54,8 +58,27 @@ public class EditReadingRec extends HttpServlet {
 				String title = request.getParameter("title");
 				String author = request.getParameter("author");	    
 				String readStatus = request.getParameter("readStatus");
-				int count = Integer.parseInt( request.getParameter("count") );
-				int point = Integer.parseInt( request.getParameter("point") );
+				
+				try {
+					
+					count = Integer.parseInt( request.getParameter("count") );
+				}catch(NumberFormatException e){
+					request.setAttribute("errorMsg", "0以上の数字を入力してください。");
+					
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/EditReadingRec.jsp");
+//					dispatcher.forward(request, response);
+				}
+				
+				try {
+					point = Integer.parseInt( request.getParameter("point") );
+				
+				}catch(NumberFormatException e){
+					request.setAttribute("errorMsg", "0以上の数字を入力してください。");
+					
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/EditReadingRec.jsp");
+//					dispatcher.forward(request, response);
+					
+				}
 				String impression = request.getParameter("impression");
 				
 				ReadingRecBean Record = new ReadingRecBean(readingRecID, title, author, readStatus, count, point, impression);

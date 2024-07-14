@@ -22,7 +22,7 @@
   	<h3>読書状況　　　161</h3>
   	<table class="rounded-table">
 	    <tr>
-	        <td><b>未登録</b><br> <c:out value="${Record.readStatus}" /> </td>
+	        <td><b>未登録</b><br>value=<c:out value="${Record.readStatus}" /></td>
 	        <td><b>読みたい</b><br>14</td>
 	        <td><b>積読</b><br>5</td>
 	    </tr>

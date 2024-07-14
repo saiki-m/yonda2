@@ -8,6 +8,9 @@ import java.sql.SQLException;
 
 import model.ConfigDB;
 
+/**
+ * データベースに保存されているパスワードを再設定する
+ */
 public class RePassDAO{
 	
 	public void rePass(String password, int accountID) {

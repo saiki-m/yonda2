@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ *    画面下部にあるログアウトボタンを押したとき実行するサーブレットクラス
+ */
 @WebServlet("/LogOut")
 public class LogOut extends HttpServlet {
 	private static final long serialVersionUID = 1L; 

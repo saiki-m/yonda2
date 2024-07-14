@@ -22,10 +22,9 @@
         </c:if>
       <form action="RePass" method="post">
         <input type="password" name="password" class="input-field" placeholder="新しいパスワード" required>
-        <input type="password" name="password2" class="input-field" placeholder="新しいパスワードの確認" required><br>
+        <input type="password" name="confirmPassword" class="input-field" placeholder="新しいパスワードの確認" required><br>
         <button type="submit" class="cert-btn">OK</button>
         
-        <input type="hidden" name="accountID" value=<c:out value="${accountID}"/>>
     </div>
   </main>
   </body>

@@ -70,7 +70,7 @@
 		    </tr>
 		</table>
 		
-		<a href="EditProfile?edit=done" class="btn">編集</a><br>
+		<a href="EditProfile" class="btn">編集</a><br>
 		<a href="LogOut" class="logout-btn">ログアウト</a>
 		
 </main>

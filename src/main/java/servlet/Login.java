@@ -13,10 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ *  ログイン
+ */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 *  TOPページのログインボタンを押したとき、ログインページに移動する
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
@@ -24,7 +30,7 @@ public class Login extends HttpServlet {
 	}
 	
 	/**
-	 *	ログイン画面からマイページに移動させる
+	 *	ログイン画面で認証後、該当アカウント情報を取得。マイページに移動する。
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

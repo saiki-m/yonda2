@@ -12,9 +12,10 @@ import beans.ProfileBean;
 import model.ConfigDB;
 
 
-//アカウント情報をアカウントテーブルに新規登録するDAO
-//サンプルデータがアカウントテーブルに登録されていなかったらエラーになる。
-//configDB.javaを継承
+/**
+ * アカウント情報をアカウントテーブルに新規登録するDAO
+ * サンプルデータがアカウントテーブルに登録されていなかったらエラーになる。
+ */
 public class ShowProfileDAO{
 	
 	public ProfileBean show(int accountID) {
@@ -26,7 +27,6 @@ public class ShowProfileDAO{
 			
 			ProfileBean profile = null;
 			
-			// アカウントテーブルからアカウント名が一致し、パスワードも一致するアカウントIDを表示。
 			String sql = "SELECT 性別, 生年月日, 職業, 在住都道府県, パーソナルタグ,"
 					+ " 興味のあるジャンル, 好きな作家, お気に入り1位,"
 					+ " お気に入り2位, お気に入り3位 FROM プロフィール WHERE アカウントID = ?";

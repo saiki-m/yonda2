@@ -10,6 +10,9 @@ import java.sql.SQLException;
 
 import model.ConfigDB;
 
+/**
+ *  アカウントがデータベース上にいるか確認する
+ */
 public class RePassIdDAO{
 	
     public Integer findAccountID(String name, String mailAd, String secret_q) {

@@ -38,13 +38,12 @@ public class RePassId extends HttpServlet {
 		Integer accountID = new RePassIdDAO().findAccountID(name, mailAd, secret_q);
 		
 		if (accountID == 0) { 
-			// アカウントIDが見つからず、取得できなかったとき。
+			// アカウントIDが取得できなかったとき
 			request.setAttribute("errorMsg", "本人確認できませんでした。すべての項目を正しく入力してください");		
 		}
 	    else {
-	    	//アカウントIDが見つかったとき
-	    	//パスワード再設定画面へ
-	    	request.setAttribute("accountID", accountID);
+	    	//アカウントIDを保存し、パスワード再設定する画面へ
+	    	request.getSession().setAttribute("accountID", accountID);
 	    	path = "WEB-INF/jsp/rePass.jsp";
 	    }
 	

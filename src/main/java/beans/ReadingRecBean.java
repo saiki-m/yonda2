@@ -19,7 +19,7 @@ public class ReadingRecBean implements Serializable{
 	
 	public ReadingRecBean() { }
 	
-	//ログイン時に本棚の内容を取得
+	//本棚の内容を取得
 	public ReadingRecBean(int readingRecID, String title, String author, String readStatus, int count, int point, String impression) {
 		
 		this(title, author, readStatus, count, point, impression);

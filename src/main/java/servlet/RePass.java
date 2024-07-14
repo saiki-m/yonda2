@@ -21,10 +21,13 @@ public class RePass extends HttpServlet {
 		String path = "WEB-INF/jsp/rePass.jsp";
 		
 		String password = request.getParameter("password");
-		String password2 = request.getParameter("password2");
-		int accountID= Integer.parseInt(request.getParameter("accountID"));
+		String confirmPassword = request.getParameter("confirmPassword");
 		
-		if(password.equals(password2)){
+		Integer accountID = (Integer)request.getSession().getAttribute("accountID");
+		
+		//int accountID= Integer.parseInt(request.getParameter("accountID"));
+		
+		if(password.equals(confirmPassword)){
 			
 			new RePassDAO().rePass(password, accountID);   //パスワードを再設定する。
 			

@@ -13,6 +13,7 @@ import model.ConfigDB;
 
 /**
  * 	ログイン画面からマイページに移動するとき起動するクラス。
+ *  該当するアカウントがあれば、そのアカウント情報を取得する。
  */
 public class LoginDAO{
   
