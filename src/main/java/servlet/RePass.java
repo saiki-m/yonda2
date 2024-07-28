@@ -25,8 +25,6 @@ public class RePass extends HttpServlet {
 		
 		Integer accountID = (Integer)request.getSession().getAttribute("accountID");
 		
-		//int accountID= Integer.parseInt(request.getParameter("accountID"));
-		
 		if(password.equals(confirmPassword)){
 			
 			new RePassDAO().rePass(password, accountID);   //パスワードを再設定する。

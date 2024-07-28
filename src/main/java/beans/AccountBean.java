@@ -30,9 +30,9 @@ public class AccountBean implements Serializable{
 	public AccountBean(int accountID, String name, String password, String mailAd, String secret_q) {
 		
 		this(name, password, mailAd, secret_q);
-	    this.accountID = accountID;
+		this.accountID = accountID;
 	}
-	
+
 	
 	//ゲッター
 	public int getAccountID() { return accountID; }

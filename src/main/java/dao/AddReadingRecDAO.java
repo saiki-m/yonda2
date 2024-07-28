@@ -79,10 +79,10 @@ public class AddReadingRecDAO{
 				int point = rs.getInt("点数");
 				String impression = rs.getString("感想");
 				
-				ReadingRecBean record2 = new ReadingRecBean(ID, title, author, 
+				ReadingRecBean record = new ReadingRecBean(ID, title, author, 
 						readStatus, count, point, impression);
 				
-				readingRecList.add(record2);
+				readingRecList.add(record);
 			}
 			
 			return readingRecList;

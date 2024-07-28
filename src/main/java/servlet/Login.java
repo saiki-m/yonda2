@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import beans.AccountBean;
 import dao.LoginDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,8 +24,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 	
 	/**
@@ -34,26 +32,26 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = "WEB-INF/jsp/login.jsp";
+		String URL = "WEB-INF/jsp/login.jsp";
 		
 		// 入力した名前、パスワードを取得
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
+		final String name = request.getParameter("name");
+		final String password = request.getParameter("password");
 		
 		//データベースからアカウントIDを見つけて取得する。
 		AccountBean accountInfo = new LoginDAO().findAccount(name, password);
 		
 		if (accountInfo != null) {
-			//ログイン成功
-			request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
 			
-			path = "WEB-INF/jsp/myPage.jsp";
+			request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
+			URL = "/MyPage";
 		}
 		else {
+			
 			request.setAttribute("errorMsg", "ユーザ名、パスワードを正しく入力してください");
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher(URL).forward(request, response);
+		
 	}
 }

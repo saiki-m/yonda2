@@ -60,25 +60,15 @@ public class EditReadingRec extends HttpServlet {
 				String readStatus = request.getParameter("readStatus");
 				
 				try {
-					
 					count = Integer.parseInt( request.getParameter("count") );
-				}catch(NumberFormatException e){
-					request.setAttribute("errorMsg", "0以上の数字を入力してください。");
-					
-//					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/EditReadingRec.jsp");
-//					dispatcher.forward(request, response);
-				}
+				
+				}catch(NumberFormatException e){ }
 				
 				try {
 					point = Integer.parseInt( request.getParameter("point") );
 				
-				}catch(NumberFormatException e){
-					request.setAttribute("errorMsg", "0以上の数字を入力してください。");
-					
-//					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/EditReadingRec.jsp");
-//					dispatcher.forward(request, response);
-					
-				}
+				}catch(NumberFormatException e){ }
+				
 				String impression = request.getParameter("impression");
 				
 				ReadingRecBean Record = new ReadingRecBean(readingRecID, title, author, readStatus, count, point, impression);

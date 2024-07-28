@@ -7,7 +7,7 @@ import java.util.List;
 
 import beans.AccountBean;
 import beans.ReadingRecBean;
-import dao.AddReadingRecDAO;
+import dao.ShowReadingRecDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +25,7 @@ public class BookShelf extends HttpServlet {
 	
 		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
 		
-		List<ReadingRecBean> readingRecList = new AddReadingRecDAO().findAll(accountInfo.getAccountID());
+		List<ReadingRecBean> readingRecList = new ShowReadingRecDAO().findAll(accountInfo.getAccountID());
 	
 		//セッションスコープに保存。
 		request.getSession().setAttribute("readingRecList", readingRecList);

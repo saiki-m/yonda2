@@ -11,14 +11,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- *  顔写真アイコンをおしたときマイページに戻るクラス。
+ *  マイページを表示するクラス。
  */
 @WebServlet("/MyPage")
 public class MyPage extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 	
+	/**
+	 *	顔写真アイコンをおしたときマイページに戻る
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+//		CountReadStatusDAO dao = new CountReadStatusDAO();
+//		
+//		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
+//		
+//		Map<String, Integer> readStatus = dao.countReadStatus(accountInfo.getAccountID()); 
+//		
 		request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp").forward(request, response);
 	}
+	
+	/**
+	 *	ログイン後マイページに移動する
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		CountReadStatusDAO dao = new CountReadStatusDAO();
+//		
+//		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
+//		
+//		Map<String, Integer> readStatus = dao.countReadStatus(accountInfo.getAccountID()); 
+//		
+		request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp").forward(request, response);
+	}
+	
+	
 }
