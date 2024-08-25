@@ -38,6 +38,8 @@ public class EntryAccountDAO{
 			// INSERT文を実行（resultには追加された行数が代入される）
 			pStmt.executeUpdate();
 			
+			pStmt.getMaxRows();
+			
 			insertAccountID_IntoProfile();
 			
 		}catch (SQLException e) {

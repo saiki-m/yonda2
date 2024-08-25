@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import beans.ReadingRecBean;
 import model.ConfigDB;
@@ -20,7 +21,7 @@ public class AddReadingRecDAO{
 	}
 
 	//本棚に本を追加
-	public boolean create(ReadingRecBean rec, int accountID) {
+	public void create(Map<String, String> info, int accountID) {
 		
 		// データベースへ接続
 		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
@@ -32,21 +33,19 @@ public class AddReadingRecDAO{
 			
 			//WHERE文の?に代入
 			pStmt.setInt(1, accountID);
-			pStmt.setString(2, rec.getTitle());
-			pStmt.setString(3, rec.getAuthor());
-			pStmt.setString(4, rec.getReadStatus());
-			pStmt.setInt(5, rec.getCount());
-			pStmt.setInt(6, rec.getPoint());
-			pStmt.setString(7, rec.getImpression());
+			pStmt.setString(2, info.get("title"));
+			pStmt.setString(3, info.get("author"));
+			pStmt.setString(4, info.get("readStatus"));
+			pStmt.setInt(5, Integer.parseInt(info.get("count")));  //jspのminとmaxで正の整数値以外(アルファベット、負の整数値など)の値が入らないため、try-catchを省略。
+			pStmt.setInt(6, Integer.parseInt(info.get("point")));
+			pStmt.setString(7, info.get("impression"));
 			
 			// INSERT文を実行（resultには追加された行数が代入される）
 			pStmt.executeUpdate();
 			
-			return true;
 		}  
 		catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 	

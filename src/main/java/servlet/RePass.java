@@ -18,23 +18,21 @@ public class RePass extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = "WEB-INF/jsp/rePass.jsp";
-		
+		String nextURL = "WEB-INF/jsp/rePassResult.jsp";
+
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
-		
-		Integer accountID = (Integer)request.getSession().getAttribute("accountID");
-		
+
 		if(password.equals(confirmPassword)){
 			
-			new RePassDAO().rePass(password, accountID);   //パスワードを再設定する。
-			
-			path = "WEB-INF/jsp/rePassResult.jsp"; 	
+			Integer accountID = (Integer)request.getSession().getAttribute("accountID");
+			new RePassDAO().rePass(password, accountID);   //パスワードを再設定する。			
 		}
 		else {
 			request.setAttribute("errorMsg", "同じパスワードを入力してください");
+			nextURL = "WEB-INF/jsp/rePass.jsp"; 	
 		}
 		
-		request.getRequestDispatcher(path).forward(request, response);
+		request.getRequestDispatcher(nextURL).forward(request, response);
 	}
 }
