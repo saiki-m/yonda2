@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import model.ConfigDB;
 
@@ -17,7 +18,7 @@ public class EntryAccountDAO{
 		ConfigDB.ReadJDBC_Driver();
 	}
 	
-	public void create(String[] account) {
+	public void create(Map<String, String> account) {
 		
 		// データベースへ接続
 		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
@@ -29,9 +30,10 @@ public class EntryAccountDAO{
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//WHERE文の?に代入
-			for(int i = 0; i < account.length; i++) {
-				pStmt.setString(i+1, account[i]);
-			}
+				pStmt.setString(1, account.get("name"));
+				pStmt.setString(2, account.get("password"));
+				pStmt.setString(3, account.get("mailAd"));
+				pStmt.setString(4, account.get("secret_q"));
 			
 			// INSERT文を実行（resultには追加された行数が代入される）
 			pStmt.executeUpdate();
@@ -43,7 +45,7 @@ public class EntryAccountDAO{
 		}	
 	}
 	
-	public void insertAccountID_IntoProfile() {
+	private void insertAccountID_IntoProfile() {
 		
 		// データベースへ接続
 		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
@@ -65,12 +67,12 @@ public class EntryAccountDAO{
 		
 	}
 	
-	public int getRegistAccountID() {
+	private int getRegistAccountID() {
 		
-		int accountID = 0;
-
 		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS) ) {
 				
+			int accountID = 0;
+
 			//アカウントテーブルに登録されるアカウントIDはオートインクリメントのため、MAX関数で取得。	
 			String sql = "SELECT MAX(アカウントID) AS アカウントID FROM アカウント";
 			

@@ -3,6 +3,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import beans.AccountBean;
 import dao.LoginDAO;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.GetParameterFromJSP;
 
 /**
  *  ログイン
@@ -32,26 +34,21 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String URL = "WEB-INF/jsp/login.jsp";
+		Map<String, String> info = GetParameterFromJSP.get(request, "name", "password");
 		
-		// 入力した名前、パスワードを取得
-		final String name = request.getParameter("name");
-		final String password = request.getParameter("password");
+		AccountBean accountInfo = new LoginDAO().findAccount(info);
 		
-		//データベースからアカウントIDを見つけて取得する。
-		AccountBean accountInfo = new LoginDAO().findAccount(name, password);
-		
-		if (accountInfo != null) {
-			
-			request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
-			URL = "/MyPage";
-		}
-		else {
+		request.getSession().setAttribute("accountInfo", accountInfo);    //情報を保存。 マイページや本棚で使うため。
+
+		String nextURL = "/MyPage";
+
+		if (accountInfo == null) {
 			
 			request.setAttribute("errorMsg", "ユーザ名、パスワードを正しく入力してください");
+			nextURL = "WEB-INF/jsp/login.jsp";
 		}
 
-		request.getRequestDispatcher(URL).forward(request, response);
+		request.getRequestDispatcher(nextURL).forward(request, response);
 		
 	}
 }

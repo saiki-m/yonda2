@@ -17,17 +17,17 @@
   <main>
 	  <jsp:include page = "myPageMenu.jsp" />
 
-  	<h3>読書状況　　　161</h3>
+  	<h3>読書状況</h3>
   	<table class="rounded-table">
 	    <tr>
-	        <td><b>未登録</b><br> <c:out value="${Record.readStatus}" /> </td>
-	        <td><b>読みたい</b><br>14</td>
-	        <td><b>積読</b><br>5</td>
+	        <td><b>未登録</b><br> <c:out value="${readStatus.未登録}"/> </td>
+	        <td><b>読みたい</b><br> <c:out value="${readStatus.読みたい}"/> </td>
+	        <td><b>積読</b><br> <c:out value="${readStatus.積読}"/> </td>
 	    </tr>
 	    <tr>
-	        <td><b>いま読んでいる</b><br>2</td>
-	        <td><b>読み終わった</b><br>105</td>
-	        <td><b>感想を書いた</b><br>32</td>
+	        <td><b>いま読んでいる</b><br> <c:out value="${readStatus.いま読んでいる}"/> </td>
+	        <td><b>読み終わった</b><br> <c:out value="${readStatus.読み終わった}"/> </td>
+	        <td><b>感想を書いた</b><br> <c:out value="${readStatus.感想を書いた}"/> </td>
 	    </tr>
 	</table>
 

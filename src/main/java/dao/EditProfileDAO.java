@@ -2,11 +2,12 @@
 
 package dao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 
-import beans.ProfileBean;
 import model.ConfigDB;
 
 
@@ -15,7 +16,7 @@ import model.ConfigDB;
 //configDB.javaを継承
 public class EditProfileDAO{
 	
-	public void update(ProfileBean profileInfo, int accountID) {
+	public void update(Map<String, String> info, Date birthday, int accountID) {
 		
 		ConfigDB.ReadJDBC_Driver();
 		
@@ -29,22 +30,17 @@ public class EditProfileDAO{
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			//WHERE文の?に代入
-			for(int i = 0; i < (profileInfo.getStrProfileInfo().length + 1); i++) {
-				//生年月日のとき
-				if(i == 1) {
-					pStmt.setDate(i+1, profileInfo.getBirthday());
-					continue; 
-				}
-				
-				//アカウントIDのとき
-				if(i == profileInfo.getStrProfileInfo().length) {
-					pStmt.setInt(i+1, accountID);
-					break;
-				}
-				
-				pStmt.setString(i+1, profileInfo.getStrProfileInfo()[i]);
-			}
+			pStmt.setString(1, info.get("gender"));
+			pStmt.setDate(2, birthday);
+			pStmt.setString(3, info.get("profession"));
+			pStmt.setString(4, info.get("prefectures"));
+			pStmt.setString(5, info.get("keyword"));
+			pStmt.setString(6, info.get("genru"));
+			pStmt.setString(7, info.get("author"));
+			pStmt.setString(8, info.get("book_1"));
+			pStmt.setString(9, info.get("book_2"));
+			pStmt.setString(10, info.get("book_3"));
+			pStmt.setInt(11, accountID);
 			
 			pStmt.executeUpdate();
 			conn.commit();

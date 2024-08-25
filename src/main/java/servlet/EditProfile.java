@@ -4,15 +4,16 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Map;
 
 import beans.AccountBean;
-import beans.ProfileBean;
 import dao.EditProfileDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.GetParameterFromJSP;
 import model.selectProfile;
 
 @WebServlet("/EditProfile")
@@ -34,15 +35,12 @@ public class EditProfile extends HttpServlet {
 		
 		Date Birthday = null; 
 		
-		String[] strInfo = {"gender", "birthday", "profession", "prefectures", "keyword",
-				"genru", "author", "book_1", "book_2", "book_3"};
-		
-		for(int i = 0; i < strInfo.length; i++) {
-			strInfo[i] = request.getParameter(strInfo[i]);
-		}
+		Map<String, String> info = GetParameterFromJSP.get(request, "gender", "birthday",
+				"profession", "prefectures", "keyword",
+				"genru", "author", "book_1", "book_2", "book_3");
 		
 		try {			
-			Birthday = java.sql.Date.valueOf(strInfo[1]);
+			Birthday = java.sql.Date.valueOf(info.get("birthday"));
 		}
 		catch(IllegalArgumentException e){
 			
@@ -50,14 +48,11 @@ public class EditProfile extends HttpServlet {
 			nextForwardPath = "WEB-INF/jsp/profileEdit.jsp";
 		}
 		
-		ProfileBean profile = new ProfileBean(Birthday, strInfo);
-		
-		
 		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
 		
 		int accountID = accountInfo.getAccountID();
 		
-		new EditProfileDAO().update(profile, accountID);
+		new EditProfileDAO().update(info, Birthday, accountID);
 		
 		request.setAttribute("Msg", "更新しました！");
 		

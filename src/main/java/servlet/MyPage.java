@@ -4,6 +4,8 @@ package servlet;
 
 import java.io.IOException;
 
+import beans.AccountBean;
+import dao.CountReadStatusDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,14 +23,8 @@ public class MyPage extends HttpServlet {
 	 *	顔写真アイコンをおしたときマイページに戻る
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		CountReadStatusDAO dao = new CountReadStatusDAO();
-//		
-//		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
-//		
-//		Map<String, Integer> readStatus = dao.countReadStatus(accountInfo.getAccountID()); 
-//		
-		request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp").forward(request, response);
+
+		commonlogic(request, response);
 	}
 	
 	/**
@@ -36,14 +32,19 @@ public class MyPage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		CountReadStatusDAO dao = new CountReadStatusDAO();
-//		
-//		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
-//		
-//		Map<String, Integer> readStatus = dao.countReadStatus(accountInfo.getAccountID()); 
-//		
+		commonlogic(request, response);	
+	}	
+
+	private void commonlogic(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		AccountBean accountInfo = (AccountBean)request.getSession().getAttribute("accountInfo");
+		
+		CountReadStatusDAO dao = new CountReadStatusDAO();
+						
+		request.getSession().setAttribute("readStatus", dao.count(accountInfo.getAccountID()));    //情報を保存。 マイページや本棚で使うため。
+		
 		request.getRequestDispatcher("WEB-INF/jsp/myPage.jsp").forward(request, response);
-	}
 	
+	}
 	
 }

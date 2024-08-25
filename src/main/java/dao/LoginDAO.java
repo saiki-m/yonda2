@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import beans.AccountBean;
 import model.ConfigDB;
@@ -26,7 +27,7 @@ public class LoginDAO{
 	 * @return	アカウント情報（アカウントID、アカウント名、パスワード名、
 	 * 					メールアドレス、秘密の質問）を格納しているインスタンス
 	 */
-	public AccountBean findAccount(String name, String password) {
+	public AccountBean findAccount(Map<String, String> info) {
 		
 		ConfigDB.ReadJDBC_Driver();
     
@@ -41,13 +42,14 @@ public class LoginDAO{
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	      
 	        //WHERE文の?に代入
-	        pStmt.setString(1, name);
-	        pStmt.setString(2, password);
+	        pStmt.setString(1, info.get("name"));
+	        pStmt.setString(2, info.get("password"));
 
       
 		    // SELECTを実行し、結果表を取得
 		    ResultSet rs = pStmt.executeQuery();
       
+		    
 	        // 結果表にあるアカウントIDをaccountIDインスタンスに保存。
 	        if(rs.next()) {
 		        int ID = rs.getInt("アカウントID");
