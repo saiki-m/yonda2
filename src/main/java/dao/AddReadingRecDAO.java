@@ -68,7 +68,6 @@ public class AddReadingRecDAO{
 			ResultSet rs = pStmt.executeQuery();
 			
 			// 結果表に格納されたレコードの内容を
-			// record2インスタンスに設定し、readingRecListインスタンスに追加
 			while (rs.next()) {
 				int ID = rs.getInt("読書状況ID");
 				String title = rs.getString("タイトル");

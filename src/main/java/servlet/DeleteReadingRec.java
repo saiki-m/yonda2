@@ -5,7 +5,6 @@ import java.util.List;
 
 import beans.ReadingRecBean;
 import dao.DeleteReadingRecDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,8 +24,7 @@ public class DeleteReadingRec extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/readingRecAdd.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/readingRecAdd.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,11 +41,6 @@ public class DeleteReadingRec extends HttpServlet {
 		
 		request.setAttribute("Msg", "削除しました!"); 
 		
-		//https://magazine.techacademy.jp/magazine/18607#sec3
-		//スコープ内の読書記録を削除
-		readingRecList.remove(index);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/bookShelf.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/BookShelf").forward(request, response);
 	}
 }

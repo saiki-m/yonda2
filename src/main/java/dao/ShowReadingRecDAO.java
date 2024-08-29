@@ -15,7 +15,11 @@ import model.ConfigDB;
 
 public class ShowReadingRecDAO{
 	
-	//読書記録の一覧を取得
+	/**
+	 * 読書記録の一覧を取得
+	 * @param accountID   ログイン中のアカウントID
+	 * @return 読書記録の一覧
+	 */
 	public List<ReadingRecBean> findAll(int accountID) {
 		
 		ConfigDB.ReadJDBC_Driver();

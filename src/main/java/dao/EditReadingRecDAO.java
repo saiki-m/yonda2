@@ -6,14 +6,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 
-import beans.ReadingRecBean;
 import model.ConfigDB;
 
 public class EditReadingRecDAO{
 	
 	//本棚に本を追加
-	public boolean update(ReadingRecBean rec) {
+	public void update(Map<String, String> info, int readingRecId) {
 		
 		//親クラスConfigDBのメソッドを利用
 		ConfigDB.ReadJDBC_Driver();
@@ -26,24 +26,20 @@ public class EditReadingRecDAO{
     		     
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
-			//WHERE文の?に代入
-			
-			pStmt.setString(1, rec.getTitle());
-			pStmt.setString(2, rec.getAuthor());
-			pStmt.setString(3, rec.getReadStatus());
-			pStmt.setInt(4, rec.getCount());
-			pStmt.setInt(5, rec.getPoint());
-			pStmt.setString(6, rec.getImpression());
-			pStmt.setInt(7, rec.getReadingRecID());
+			pStmt.setString(1, info.get("title"));
+			pStmt.setString(2, info.get("author"));
+			pStmt.setString(3, info.get("readStatus"));
+			pStmt.setInt(4, Integer.parseInt(info.get("count")));
+			pStmt.setInt(5, Integer.parseInt(info.get("point")));
+			pStmt.setString(6, info.get("impression"));
+			pStmt.setInt(7, readingRecId);
 			
 			// INSERT文を実行
 			pStmt.executeUpdate();
 			
-		    return true;
 		}  
 		catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
 	}	    
 }
