@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.GetParameterFromJSP;
+import model.ValidPassWord;
 
 /**
  *   アカウント新規登録
@@ -25,10 +26,19 @@ public class EntryAccount extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Map<String, String> info = GetParameterFromJSP.get(request, "name", "password", "mailAd", "secret_q");
-				
-		new EntryAccountDAO().create(info);
+		String nextURL = "WEB-INF/jsp/accountResult.jsp";
 		
-		request.getRequestDispatcher("WEB-INF/jsp/accountResult.jsp").forward(request, response);
+		Map<String, String> info = GetParameterFromJSP.get(request, "name", "password", "mailAd", "secret_q");
+	
+		if(ValidPassWord.check(info.get("password"))) {
+			new EntryAccountDAO().create(info);
+			
+		}else {
+			request.setAttribute("errorMsg", "英字の大文字、小文字、数字を組み合わせて、4桁以上のパスワードを作成してください。");
+			nextURL = "WEB-INF/jsp/accountEntry.jsp";
+		}
+		
+		request.getRequestDispatcher(nextURL).forward(request, response);
+		
 	}
 }
