@@ -1,6 +1,7 @@
 //「スッキリわかるサーブレット＆JSP入門」コード13-3、コード13-5～13-9を参考
 
 package dao;
+import static model.ConfigDB.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,18 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 
-import model.ConfigDB;
-
 public class EditReadingRecDAO{
 	
 	//本棚に本を追加
 	public void update(Map<String, String> info, int readingRecId) {
 		
 		//親クラスConfigDBのメソッドを利用
-		ConfigDB.ReadJDBC_Driver();
+		ReadJDBC_Driver();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
 			String sql = "UPDATE 読書状況 SET タイトル = ?, 作者 = ?, 読書状況 = ?, 回数 = ?, 点数 = ?, 感想 = ? WHERE 読書状況ID = ? ";

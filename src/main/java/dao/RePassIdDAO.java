@@ -1,6 +1,7 @@
 //「スッキリわかるサーブレット＆JSP入門」P392のコード13-3を参考
 
 package dao;
+import static model.ConfigDB.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import model.ConfigDB;
-
 /**
  *  アカウントがデータベース上にいるか確認する
  */
@@ -18,9 +17,9 @@ public class RePassIdDAO{
 	
     public Integer findAccountID(Map<String, String> info) {
 	  
-    	ConfigDB.ReadJDBC_Driver();
+    	ReadJDBC_Driver();
 	
-        try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
     	
         	int accountID = 0;
 

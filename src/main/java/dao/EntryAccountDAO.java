@@ -1,6 +1,7 @@
 //「スッキリわかるサーブレット＆JSP入門」コード13-3、コード13-5～13-9を参考
 
 package dao;
+import static model.ConfigDB.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,19 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import model.ConfigDB;
-
 public class EntryAccountDAO{
 	
 	public EntryAccountDAO(){
 		//JDBCドライバーを読み込む。newでインスタンス生成されたらこのメソッド実行される。
-		ConfigDB.ReadJDBC_Driver();
+		ReadJDBC_Driver();
 	}
 	
 	public void create(Map<String, String> account) {
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備。プロフィールIDはNULLのまま。プロフィール編集したときに更新する。
 			String sql = "INSERT INTO アカウント(アカウント名, パスワード, メールアドレス, 秘密の質問)\r\n"
@@ -50,7 +49,7 @@ public class EntryAccountDAO{
 	private void insertAccountID_IntoProfile() {
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			String sql = "INSERT INTO プロフィール(アカウントID) VALUES (?)";
 			
@@ -71,7 +70,7 @@ public class EntryAccountDAO{
 	
 	private int getRegistAccountID() {
 		
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS) ) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS) ) {
 				
 			int accountID = 0;
 

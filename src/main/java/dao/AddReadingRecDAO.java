@@ -2,6 +2,8 @@
 
 package dao;
 
+import static model.ConfigDB.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,23 +14,24 @@ import java.util.List;
 import java.util.Map;
 
 import beans.ReadingRecBean;
-import model.ConfigDB;
 
 public class AddReadingRecDAO{
 	
 	public AddReadingRecDAO() {
-		ConfigDB.ReadJDBC_Driver();
+		ReadJDBC_Driver();
 	}
 
 	//本棚に本を追加
 	public void create(Map<String, String> info, int accountID) {
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "INSERT INTO 読書状況(アカウントID, タイトル, 作者, 読書状況, 回数, 点数, 感想)"
+			String sql = "INSERT INTO 読書状況"
+					+ "(アカウントID, タイトル, 作者, 読書状況, 回数, 点数, 感想)"
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			//WHERE文の?に代入
@@ -55,10 +58,10 @@ public class AddReadingRecDAO{
 		List<ReadingRecBean> readingRecList = new ArrayList<>();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			// SELECT文を準備
-			String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況, 回数, 点数, 感想 FROM 読書状況 WHERE アカウントID = ?";
-			
+			String sql = "SELECT 読書状況ID, タイトル, 作者, 読書状況, 回数, 点数, 感想"
+					+ " FROM 読書状況 WHERE アカウントID = ?";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			

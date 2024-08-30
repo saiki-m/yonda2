@@ -2,6 +2,8 @@
 
 package dao;
 
+import static model.ConfigDB.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,7 +12,6 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import beans.AccountBean;
-import model.ConfigDB;
 
 /**
  * 	ログイン画面からマイページに移動するとき起動するクラス。
@@ -29,10 +30,10 @@ public class LoginDAO{
 	 */
 	public AccountBean findAccount(Map<String, String> info) {
 		
-		ConfigDB.ReadJDBC_Driver();
+		ReadJDBC_Driver();
     
 	    // データベースへ接続
-	    try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
     	
 	    	AccountBean account = null;
 	    	

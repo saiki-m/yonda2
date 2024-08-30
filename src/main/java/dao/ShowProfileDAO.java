@@ -1,6 +1,9 @@
 //「スッキリわかるサーブレット＆JSP入門」コード13-3、コード13-5～13-9を参考
 
 package dao;
+
+import static model.ConfigDB.*;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -9,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import beans.ProfileBean;
-import model.ConfigDB;
 
 
 /**
@@ -20,10 +22,10 @@ public class ShowProfileDAO{
 	
 	public ProfileBean show(int accountID) {
 		
-		ConfigDB.ReadJDBC_Driver();
+		ReadJDBC_Driver();
 		
 		// データベースへ接続
-		try (Connection conn = DriverManager.getConnection(ConfigDB.JDBC_URL, ConfigDB.DB_USER, ConfigDB.DB_PASS)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			ProfileBean profile = null;
 			
