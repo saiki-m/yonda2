@@ -1,3 +1,5 @@
+/* 書籍テーブルの定義 */
+
 CREATE TABLE 書籍 (書籍ID INTEGER  NOT NULL  AUTO_INCREMENT,
                    タイトル VARCHAR(100)  NOT NULL,
                    ジャンルID INTEGER  NOT NULL,
@@ -15,7 +17,8 @@ CREATE TABLE 書籍 (書籍ID INTEGER  NOT NULL  AUTO_INCREMENT,
                    );
                    
                    
-                   
+/* 書籍テーブルのサンプルデータ */
+
 INSERT INTO 書籍(タイトル, ジャンルID, 作者ID, 
                  訳者ID, 出版社, 媒体, 金額, 版数)
      VALUES ('容疑者Xの献身', 1, 1, 1, '文藝春秋', '文庫本', 100, 1),

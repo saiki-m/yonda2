@@ -1,3 +1,4 @@
+/* 訳者テーブルの定義 */
 CREATE TABLE 訳者 (訳者ID INTEGER  NOT NULL  AUTO_INCREMENT,
                    訳者 VARCHAR(100)  NOT NULL,
                    
@@ -5,7 +6,7 @@ CREATE TABLE 訳者 (訳者ID INTEGER  NOT NULL  AUTO_INCREMENT,
 );
 
 
-
+/* 訳者テーブルのサンプルデータ */
 INSERT INTO 訳者(訳者)
      VALUES ('なし'), 
             ('村上春樹'), 

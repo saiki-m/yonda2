@@ -1,3 +1,4 @@
+/* 読書記録テーブルの定義 */
 CREATE TABLE 読書記録 (記録ID INTEGER  NOT NULL  AUTO_INCREMENT,
                        書籍ID INTEGER  NOT NULL,
                        アカウントID INTEGER  NOT NULL,
@@ -16,7 +17,7 @@ CREATE TABLE 読書記録 (記録ID INTEGER  NOT NULL  AUTO_INCREMENT,
                        FOREIGN KEY (アカウントID) REFERENCES アカウント(アカウントID) 
                        );
 
-
+/* 読書記録テーブルのサンプルデータ */
 INSERT INTO 読書記録(書籍ID, アカウントID, 感想, 入手日, 開始日, 
                      終了日, 回数, 点数, 読書状況, メモ, 公開)
      VALUES (1, 1, '面白かった！', '2024-01-01', '2024-01-02', '2024-02-01',

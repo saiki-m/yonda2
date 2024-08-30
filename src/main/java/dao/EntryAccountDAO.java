@@ -23,7 +23,8 @@ public class EntryAccountDAO{
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備。プロフィールIDはNULLのまま。プロフィール編集したときに更新する。
-			String sql = "INSERT INTO アカウント(アカウント名, パスワード, メールアドレス, 秘密の質問)\r\n"
+			String sql = "INSERT INTO アカウント"
+					+ "(アカウント名, パスワード, メールアドレス, 秘密の質問)"
 					+ "VALUES (?, ?, ?, ?)";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);

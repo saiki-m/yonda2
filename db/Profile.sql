@@ -1,4 +1,5 @@
 CREATE TABLE プロフィール (プロフィールID INTEGER  NOT NULL  AUTO_INCREMENT, 
+                           アカウントID INTEGER NOT NULL,
                            性別 VARCHAR(2),
                            生年月日 DATE,
                            職業 VARCHAR(100), 
@@ -10,8 +11,12 @@ CREATE TABLE プロフィール (プロフィールID INTEGER  NOT NULL  AUTO_IN
                            お気に入り2位 VARCHAR(100), 
                            お気に入り3位 VARCHAR(100),
                            
-                           PRIMARY KEY (プロフィールID)
+                           PRIMARY KEY (プロフィールID),
+                           FOREIGN KEY (アカウントID) REFERENCES アカウント(アカウントID)
 );
+
+
+SELECT 性別, 生年月日, 職業, 在住都道府県, パーソナルタグ, 興味のあるジャンル, 好きな作家, お気に入り1位, お気に入り2位, お気に入り3位 FROM プロフィール WHERE アカウントID = 3;
 
 
 INSERT INTO プロフィール(性別, 生年月日, 職業, 在住都道府県, パーソナルタグ, 

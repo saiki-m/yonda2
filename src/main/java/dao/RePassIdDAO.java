@@ -24,7 +24,8 @@ public class RePassIdDAO{
         	int accountID = 0;
 
         	// SELECT文を準備
-        	String sql = "SELECT アカウントID FROM アカウント WHERE アカウント名=? AND メールアドレス=? AND 秘密の質問=?";
+        	String sql = "SELECT アカウントID FROM アカウント"
+        			+ " WHERE アカウント名=? AND メールアドレス=? AND 秘密の質問=?";
         	
         	PreparedStatement pStmt = conn.prepareStatement(sql);	    
         

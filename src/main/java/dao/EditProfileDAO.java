@@ -24,9 +24,11 @@ public class EditProfileDAO {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 
 			// SELECT文を準備
-			String sql = "UPDATE プロフィール SET 性別 = ?, 生年月日 = ?, 職業 = ?, 在住都道府県 = ?, "
-					+ "パーソナルタグ = ?, 興味のあるジャンル = ?, 好きな作家 = ?, お気に入り1位 = ?,"
-					+ " お気に入り2位 = ?, お気に入り3位 = ? WHERE アカウントID = ? ";
+			String sql = "UPDATE プロフィール SET 性別 = ?, 生年月日 = ?,"
+					+ " 職業 = ?, 在住都道府県 = ?, パーソナルタグ = ?,"
+					+ " 興味のあるジャンル = ?, 好きな作家 = ?, お気に入り1位 = ?,"
+					+ " お気に入り2位 = ?, お気に入り3位 = ? "
+					+ "WHERE アカウントID = ? ";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 

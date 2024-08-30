@@ -21,7 +21,10 @@ public class EditReadingRecDAO{
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			
 			// SELECT文を準備
-			String sql = "UPDATE 読書状況 SET タイトル = ?, 作者 = ?, 読書状況 = ?, 回数 = ?, 点数 = ?, 感想 = ? WHERE 読書状況ID = ? ";
+			String sql = "UPDATE 読書状況"
+					+ " SET タイトル = ?, 作者 = ?,"
+					+ " 読書状況 = ?, 回数 = ?, 点数 = ?, 感想 = ?"
+					+ " WHERE 読書状況ID = ? ";
     		     
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
